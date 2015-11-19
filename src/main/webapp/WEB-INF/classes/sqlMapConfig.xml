@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases >
+		<typeAlias type="java.util.List" alias="list"/>
+		<typeAlias type="java.util.HashMap" alias="hashmap"/>
+		<typeAlias type="java.lang.String" alias="str"/>
+		<typeAlias type="com.ydhdj.fyzh.bean.BookInfoBean" alias="BookInfoBean"/>
+		<typeAlias type="com.ydhdj.fyzh.bean.AttachmentInfoBean" alias="AttachmentInfoBean"/>
+		<typeAlias type="com.ydhdj.fyzh.bean.UserInfoBean" alias="UserInfoBean"/>
+	</typeAliases>
+	<mappers>
+		<mapper resource="com/ydhdj/fyzh/sqlmap/main_book.xml"/>
+		<mapper resource="com/ydhdj/fyzh/sqlmap/attachment.xml"/>
+		<mapper resource="com/ydhdj/fyzh/sqlmap/user.xml"/>
+	</mappers>
+</configuration>

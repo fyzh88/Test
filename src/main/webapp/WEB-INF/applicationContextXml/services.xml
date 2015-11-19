@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+ 
+   <!-- service实例化 -->
+	<bean id="main_service" class="com.ydhdj.fyzh.service.BookService" scope="singleton">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+ 	<bean id="attach_service" class="com.ydhdj.fyzh.service.AttachmentService" scope="singleton">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+	<bean id="user_service" class="com.ydhdj.fyzh.service.UserService" scope="singleton">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory"/>
+	</bean>
+</beans>

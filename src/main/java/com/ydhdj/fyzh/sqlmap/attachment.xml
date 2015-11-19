@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itpdf_attachment">	
+
+	<resultMap type="AttachmentInfoBean" id="attachid">
+		<id property="id" column="id"/>
+		<id property="date" column="date"/>
+		<id property="ownerId" column="owner_id"/>
+		<id property="fileName" column="file_name"/>
+		<id property="fileType" column="file_type"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="AttachmentInfoBean">
+		INSERT INTO itpdf_attachment (id,owner_id,file_name,file_type) 
+		VALUES(#{id},#{ownerId},#{fileName},#{fileType});
+	</insert>
+	
+</mapper>

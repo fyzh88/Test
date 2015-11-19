@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="itpdf_main">	
+
+	<resultMap type="BookInfoBean" id="bookid">
+		<id property="id" column="id"/>
+		<id property="user_id" column="user_id"/>
+		<id property="date" column="date"/>
+		<id property="name" column="name"/>
+		<id property="author" column="author"/>
+		<id property="pages" column="pages"/>
+		<id property="md" column="md"/>
+		<id property="save_name" column="save_name"/>
+		<id property="file_len" column="file_len"/>
+		<id property="shared_addr" column="shared_addr"/>
+		<id property="share_code" column="share_code"/>
+	</resultMap>
+	
+	<!-- 获取PDF书籍分类信息 -->
+	<select id="getAllCategory" resultType ="hashmap" parameterType="int">
+		SELECT category,COUNT(category) AS cnt FROM itpdf_books GROUP BY category ORDER BY date DESC 
+		 <if test="_parameter > 0">
+		 	LIMIT #{limitCnt};
+		 </if>
+	</select>
+	
+	<!-- 获取某PDF分类中的书籍信息 -->
+	<select id="getByCategory" resultType="BookInfoBean" parameterType="str">
+		SELECT * FROM itpdf_books WHERE category=#{category} ORDER BY date DESC LIMIT #{limitCnt};
+	</select>
+	<!--依据文件的消息摘要获取-->
+	<select id="getByMd" resultType="BookInfoBean" parameterType="str">
+		SELECT * FROM itpdf_books WHERE md=#{md};
+	</select>
+	<!-- 插入book数据 -->
+	<insert id="insert" parameterType="BookInfoBean">
+		INSERT INTO itpdf_books(id,name,author,pages,publisher,category,shared_addr,share_code) 
+		VALUES(#{id},#{name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
+	</insert>
+	
+	
+</mapper> 
