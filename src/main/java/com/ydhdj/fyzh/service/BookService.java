@@ -32,9 +32,9 @@ public class BookService {
     static {
         try {
             DefaultConfiguration config = new DefaultConfiguration("server-config.properties").load();
-            COVER_PATH = config.get("cover_path", "c:/itpdf/itpdf_cover");
-            DIRECTORY_PATH = config.get("directory_path", "c:/itpdf/itpdf_directory");
-            UPLOAD_PDF_PATH=config.get("upload_pdf_path","c:/itpdf/itpdf_upload");
+            COVER_PATH = config.get("cover_path", "/home/fyzh/itpdf/itpdf_cover");
+            DIRECTORY_PATH = config.get("directory_path", "/home/fyzh/itpdf/itpdf_directory");
+            UPLOAD_PDF_PATH=config.get("upload_pdf_path","/home/fyzh/itpdf/itpdf_upload");
         } catch (Exception ex) {
             //LOG.error("Upload file path read failure, check if property file named 'server-config.properties' exists.");
         }

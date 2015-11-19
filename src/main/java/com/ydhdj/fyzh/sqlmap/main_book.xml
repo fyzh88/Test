@@ -28,14 +28,16 @@
 	<select id="getByCategory" resultType="BookInfoBean" parameterType="str">
 		SELECT * FROM itpdf_books WHERE category=#{category} ORDER BY date DESC LIMIT #{limitCnt};
 	</select>
+	
 	<!--依据文件的消息摘要获取-->
 	<select id="getByMd" resultType="BookInfoBean" parameterType="str">
 		SELECT * FROM itpdf_books WHERE md=#{md};
 	</select>
+	
 	<!-- 插入book数据 -->
 	<insert id="insert" parameterType="BookInfoBean">
-		INSERT INTO itpdf_books(id,name,author,pages,publisher,category,shared_addr,share_code) 
-		VALUES(#{id},#{name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
+		INSERT INTO itpdf_books(id,user_id,name,author,pages,publisher,category,shared_addr,share_code) 
+		VALUES(#{id},#{user_id},#{name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
 	</insert>
 	
 	
