@@ -86,6 +86,9 @@ public class BookService {
 				bib.setFile_len((int)len);
 				//文件名称
 				bib.setName(name);
+				//MD5
+				String strMd = CommonUtils.encryptWithMD5(file);
+				bib.setMd(strMd);
 				String fileType = FileTypeProbe.getFileType(file);
 				if(fileType.compareToIgnoreCase("pdf")==0){
 					PdfParser pp  = new PdfParser(file);

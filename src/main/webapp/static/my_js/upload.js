@@ -26,11 +26,12 @@ $(function(){
 		var category=$("#category").val();
 		var shared_addr=$("#shared_addr").val();
 		var share_code=$("#share_code").val();
+		var md = $("md").val();
 		
 		var dict={"name":name,"author":author,"publisher":publisher,
 				"pages":pages,"file_len":fileLen,"category":category,
 				"shared_addr":shared_addr,"share_code":share_code,id:"",
-				user_id:""};
+				user_id:"",md:"md"};
 		var post =JSON.stringify(dict);
 		$.ajax({
 			type:'POST',

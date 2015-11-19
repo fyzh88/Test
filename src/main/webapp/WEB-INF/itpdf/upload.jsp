@@ -77,6 +77,8 @@
 	        	 <span class="input-group-addon">分享提取码</span>
 		         <input id="share_code" type="text" class="form-control" placeholder="PDF文件的分享提取码" value="${requestScope.upload_return_param['share_code'] }">
 		     </div><br>
+		     <input id="md" type="hidden" value="${requestScope.upload_return_param['md'] }">
+		     
 		     <button class="btn btn-success btn-lg pull-right" id="share_pdf">我要分享</button>	
 		</div>
 	</div>
