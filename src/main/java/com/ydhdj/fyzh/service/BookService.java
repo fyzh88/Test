@@ -78,22 +78,35 @@ public class BookService {
 	public BookInfoBean extractBookInfo(File file,final String name){
 		if(file != null){
 			try{
-				long len = file.length();
-				BookInfoBean bib = new BookInfoBean();
-				//被存盘文件名称
-				bib.setSave_name(file.getName());
-				//文件大小
-				bib.setFile_len((int)len);
-				//文件名称
-				bib.setName(name);
-				//MD5
-				String strMd = CommonUtils.encryptWithMD5(file);
-				bib.setMd(strMd);
+				BookInfoBean bib = null;
 				String fileType = FileTypeProbe.getFileType(file);
 				if(fileType.compareToIgnoreCase("pdf")==0){
+					long len = file.length();
+					bib  = new BookInfoBean();
+					//被存盘文件名称
+					bib.setSave_name(file.getName());
+					//文件大小
+					bib.setFile_len((int)len);
+					//文件的原始名称
+					bib.setName(name);
+					//作者
+					bib.setAuthor("xxx");
+					//分类
+					bib.setCategory("C++");
+					//出版社
+					bib.setPublisher("xxxxx");
+					//分享地址
+					bib.setShared_addr("");
+					//分享提取码
+					bib.setShare_code("");
+					//MD5
+					String strMd = CommonUtils.encryptWithMD5(file);
+					bib.setMd(strMd);
 					PdfParser pp  = new PdfParser(file);
 					//文件页数
 					bib.setPages(pp.getPageNum());
+				}else{
+					//不是pdf文件
 				}
 				return bib;
 			}

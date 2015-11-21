@@ -25,10 +25,13 @@ public class BookController {
 	
 	@RequestMapping("/show_main")
 	public ModelAndView showMain(){
+		//选中第一个分类，并显示该分类中的内容
+		
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("upload");
 		return mv;
 	}
+	//上传文件功能目前的打算是只为自己方便构建数据库数据而引入
 	@RequestMapping("upload_pdf")
 	public ModelAndView uploadPdf(@RequestParam(value="file", required=false)MultipartFile file,
 			HttpServletRequest request,HttpServletResponse response){
@@ -38,23 +41,26 @@ public class BookController {
 		File uploadFfn=null;
 		boolean notExist = (same_bib == null);
 		if(notExist){
+			//上传文件不存在，将文件保存在本地，为后续的解析PDF文件做准备
+			//如果是真实的部署环境，我们这里应该如何处理呢？
+			//其实我们在第一阶段是不准备开放用户上传PDF文件功能的，那么我们需要的仅仅是这个PDF文件对应的数据库记录而已
+			//如果牵扯到文件的上传，那么恐怕还有数据流量方面的限制，这一点也是我们考虑的范围
 			uploadFfn = m_bs.savePDF(file);
+			if(uploadFfn != null){
+				String name = file.getOriginalFilename();
+				BookInfoBean bib = m_bs.extractBookInfo(uploadFfn,name);
+				if(bib != null){
+					mv.getModel().put(CommonConst.UPLOAD_RETURN_PARAM, bib);
+				}else{
+				}
+				mv.getModel().put(CommonConst.UPLOAD_NOT_PDF_FILE,(bib==null));
+			}else{
+				//存盘失败
+			}
 		}else{
-			File dir = new File(BookService.UPLOAD_PDF_PATH);
-			uploadFfn = new File(dir,same_bib.getSave_name());
+			//如果在数据库中已经存在了这本PDF文件的数据，那么我们可以简单的进行忽略
 		}
 		mv.getModel().put(CommonConst.UPLOAD_ALREADY_EXIST, !notExist);
-		//
-		if(uploadFfn != null){
-			String name = file.getOriginalFilename();
-			BookInfoBean bib = m_bs.extractBookInfo(uploadFfn,name);
-			bib.setAuthor("xxx");
-			bib.setCategory("C++");
-			bib.setPublisher("xxxxx");
-			bib.setShared_addr("");
-			bib.setShare_code("");
-			mv.getModel().put(CommonConst.UPLOAD_RETURN_PARAM, bib);
-		}
 		mv.setViewName("upload");
 		return mv;
 	}
@@ -77,10 +83,10 @@ public class BookController {
 		as.insertAttachment(aib);//封面图片
 		//
 		AttachmentInfoBean aib_dir = new AttachmentInfoBean();
-		aib.setId(UUID.randomUUID().toString());
-		aib.setOwnerId(id);
-		aib.setFileName("");
-		aib.setFileType("dir");
+		aib_dir.setId(UUID.randomUUID().toString());
+		aib_dir.setOwnerId(id);
+		aib_dir.setFileName("");
+		aib_dir.setFileType("dir");
 		as.insertAttachment(aib_dir);//目录结构文件
 		
 		
