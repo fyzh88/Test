@@ -81,7 +81,8 @@ public class BookController {
 		aib.setId(UUID.randomUUID().toString());
 		aib.setOwnerId(id);
 		aib.setFileType("cover");
-		aib.setFileName("");
+		//封面和前n页的图片文件的文件名称是使用PDF文件的额md5值进行指定的，尾部有序号指示第x页
+		aib.setFileName(bib.getMd());
 		as.insertAttachment(aib);//封面图片（需要对图片的大小做限定，节约带宽）
 		//
 		AttachmentInfoBean aib_dir = new AttachmentInfoBean();

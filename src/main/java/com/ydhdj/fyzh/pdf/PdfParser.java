@@ -4,12 +4,17 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.UUID;
+
+import org.springframework.util.StringUtils;
 
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.SimpleBookmark;
@@ -80,6 +85,40 @@ public class PdfParser {
 	//提取PDF文件页为图片
 	//我们采用PDF文件的MD5值作为，封面图片的检索依据
 	public void savePdfCover(File pdfFile,final String coverPath,final String md){
-		
+		if(pdfFile == null || StringUtils.isEmpty(coverPath)|| StringUtils.isEmpty(md)){return ;}
+		File dir = new File(coverPath);
+		dir.mkdirs();
+		String fileName= pdfFile.getName();
+		String pdfDir = pdfFile.getParent();
+		    List<String> strList = new ArrayList();  		  
+		    StringBuilder builder = new StringBuilder();
+		    //change the directory
+		    builder.append("cd ").append(pdfDir).append(";");
+		    //get the first MAX_PDF_PAGES_TO_PIC page to a new PDF file
+		    builder.append("pdftk A=").append(fileName).append(" cat A1-").append(this.MAX_PDF_PAGES_TO_PIC);
+		    String limitPageFileName = UUID.randomUUID().toString()+"_tmp.pdf";
+		    builder.append(" output ").append(limitPageFileName).append(";");
+		    //convert the new PDF to image PAGE by PAGE
+		    builder.append("convert ").append(limitPageFileName).append(" ").append(md).append(".png;");
+		    //delete the template file
+		    builder.append("rm ").append(limitPageFileName).append(";");
+		    //move  all the PNG file to COVER PATH
+		    builder.append("mv *.png").append(" ").append(coverPath).append(";");
+		    //task OVER!
+		    
+		    String shStr = builder.toString();
+		    try{
+		        Process process;  
+		        process = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c",shStr},null,null);  
+		        InputStreamReader ir = new InputStreamReader(process  
+		                .getInputStream());  
+		        LineNumberReader input = new LineNumberReader(ir);  
+		        String line;  
+		        process.waitFor();  
+		        while ((line = input.readLine()) != null){  
+		            strList.add(line);  
+		        }  
+		        System.out.print(strList.toString());
+		    }catch(Exception e){e.printStackTrace();}
 	}
 }

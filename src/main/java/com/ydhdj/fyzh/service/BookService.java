@@ -108,7 +108,7 @@ public class BookService {
 					bib.setPages(pp.getPageNum());
 					pp.getMetaInfo();
 					pp.getBookmark();
-					//生成前三页PDF缩略图
+					//生成前n页PDF缩略图
 					pp.savePdfCover(file,COVER_PATH,strMd);
 				}else{
 					//不是pdf文件
