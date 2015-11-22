@@ -1,20 +1,9 @@
 package com.ydhdj.fyzh.pdf;
 
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Label;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -22,22 +11,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javax.imageio.ImageIO;
-import javax.imageio.ImageWriter;
-import javax.imageio.stream.ImageOutputStream;
-
-import org.springframework.util.StringUtils;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.PageSize;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfReader;
-import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.text.pdf.SimpleBookmark;
-import com.sun.pdfview.PDFFile;
-import com.sun.pdfview.PDFPage;
 
 
 public class PdfParser {
@@ -104,78 +79,7 @@ public class PdfParser {
 	//图片转换任务
 	//提取PDF文件页为图片
 	//我们采用PDF文件的MD5值作为，封面图片的检索依据
-	@Deprecated
-	public void savePdfCover_(final File pdfFile,final String coverPath,final String md){
-		if(pdfFile == null || StringUtils.isEmpty(coverPath)){return ;}
-		if(StringUtils.isEmpty(md)){return;}
-		//
-		RandomAccessFile raf = null;
-		try{
-			 raf = new RandomAccessFile(pdfFile, "r");  
-		     FileChannel channel = raf.getChannel();  
-		     ByteBuffer buf = channel.map(FileChannel.MapMode.READ_ONLY, 0, channel.size());  
-		     
-		     PDFFile pdffile = new PDFFile(buf);  
-		     System.out.println("页数： " + pdffile.getNumPages());  
-		     int pageNum = pdffile.getNumPages();
-		     int cnt = MAX_PDF_PAGES_TO_PIC;
-		     if(pageNum < MAX_PDF_PAGES_TO_PIC){cnt = pageNum;}
-		     for (int i = 1; i <= cnt; i++) {  
-		            // draw the first page to an image  
-		            PDFPage page = pdffile.getPage(i);  
-		            // get the width and height for the doc at the default zoom  
-		            Rectangle rect = new Rectangle(0, 0, (int) page.getBBox()
-		                    .getWidth(), (int) page.getBBox().getHeight());  
-		            // generate the image  
-		            Image img = page.getImage(rect.width, rect.height, // width &  
-		                    // height  
-		                    rect, // clip rect  
-		                    null, // null for the ImageObserver  
-		                    true, // fill background with white  
-		                    true // block until drawing is done  
-		                    );  
-		            BufferedImage tag = new BufferedImage(rect.width, rect.height,BufferedImage.TYPE_INT_RGB);  
-		              
-		            Graphics2D g=tag.createGraphics();  
-		            g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);  
-		            g.drawImage(img, 0, 0, rect.width, rect.height, null);  
-		            //
-		           saveToFile(tag,coverPath,md,i);
-		     }
-		}catch(Exception e){
-			e.printStackTrace();
-		}finally{
-			try{
-				if(raf != null){raf.close();}
-			}catch(Exception e){e.printStackTrace();	}
-		}
-	}
-	//图片存盘
-	@Deprecated
-	private void saveToFile(BufferedImage image,final String coverPath,final String md,int index){
-		if(image == null || StringUtils.isEmpty(coverPath)){return ;}
-		if(StringUtils.isEmpty(md)){return;}
-		if(index < 0){return ;}
-		ImageWriter writer = (ImageWriter)ImageIO.getImageWritersByFormatName("png").next();
-		File dir = new File(coverPath);
-		dir.mkdirs();
-		//构造封面图片的文件名称,PDF文件的MD5指纹作为文件名称
-		StringBuilder builder = new StringBuilder(md);
-		builder.append("_").append(index).append(".png");
-		File file = new File(dir,builder.toString());
-		//
-		FileOutputStream output = null;
-		try {
-			output = new FileOutputStream(file);
-			ImageOutputStream ios = ImageIO.createImageOutputStream(output);
-			writer.setOutput(ios);
-			writer.write(image);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}finally{
-			try{
-			if(output != null){output.close();}
-			}catch(Exception e){e.printStackTrace();}
-		}		
+	public void savePdfCover(File pdfFile,final String coverPath,final String md){
+		
 	}
 }
