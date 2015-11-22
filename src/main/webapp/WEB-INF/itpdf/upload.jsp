@@ -36,7 +36,9 @@
 			</form>
 		</div>
 		<div class="col-md-9">
-			<label id="pdf_file"></label>
+			<label id="pdf_file">${requestScope.upload_return_param['name'] }</label><br>
+			<label>PDF文件是否格式正确：${requestScope.upload_not_pdf_file }</label><br>
+			<label>PDF文件是否已经存在{MD5指纹识别}：${requestScope.upload_already_exist}</label>
 		</div>
 	</div>
 	

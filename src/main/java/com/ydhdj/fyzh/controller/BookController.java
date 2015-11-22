@@ -36,6 +36,7 @@ public class BookController {
 	public ModelAndView uploadPdf(@RequestParam(value="file", required=false)MultipartFile file,
 			HttpServletRequest request,HttpServletResponse response){
 		ModelAndView mv = new ModelAndView();
+		mv.getModel().put(CommonConst.UPLOAD_NOT_PDF_FILE,true);
 		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
 		BookInfoBean same_bib= m_bs.getSameFile(file);
 		File uploadFfn=null;
@@ -69,6 +70,7 @@ public class BookController {
 	public ModelAndView sharePdf(@RequestBody BookInfoBean bib){
 		ModelAndView mv = new ModelAndView();
 		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+		//为了安全起见，还是在此处处理ID等敏感信息吧
 		String id = UUID.randomUUID().toString();
 		bib.setId(id);		
 		bib.setUser_id("fec8a497-48ac-11e5-8b13-f56105f7c907");//fyzh		
@@ -80,14 +82,14 @@ public class BookController {
 		aib.setOwnerId(id);
 		aib.setFileType("cover");
 		aib.setFileName("");
-		as.insertAttachment(aib);//封面图片
+		as.insertAttachment(aib);//封面图片（需要对图片的大小做限定，节约带宽）
 		//
 		AttachmentInfoBean aib_dir = new AttachmentInfoBean();
 		aib_dir.setId(UUID.randomUUID().toString());
 		aib_dir.setOwnerId(id);
 		aib_dir.setFileName("");
 		aib_dir.setFileType("dir");
-		as.insertAttachment(aib_dir);//目录结构文件
+		as.insertAttachment(aib_dir);//目录结构文件（文本性质）
 		
 		
 		mv.setViewName("upload");
