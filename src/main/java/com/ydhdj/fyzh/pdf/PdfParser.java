@@ -95,7 +95,7 @@ public class PdfParser {
 		    //change the directory
 		    builder.append("cd ").append(pdfDir).append(";");
 		    //get the first MAX_PDF_PAGES_TO_PIC page to a new PDF file
-		    builder.append("pdftk A=").append(fileName).append(" cat A1-").append(this.MAX_PDF_PAGES_TO_PIC);
+		    builder.append("pdftk A=\'").append(fileName).append("\' cat A1-").append(this.MAX_PDF_PAGES_TO_PIC);
 		    String limitPageFileName = UUID.randomUUID().toString()+"_tmp.pdf";
 		    builder.append(" output ").append(limitPageFileName).append(";");
 		    //convert the new PDF to image PAGE by PAGE
@@ -105,7 +105,7 @@ public class PdfParser {
 		    //move  all the PNG file to COVER PATH
 		    builder.append("mv *.png").append(" ").append(coverPath).append(";");
 		    //task OVER!
-		    
+		    System.out.println(builder.toString());
 		    String shStr = builder.toString();
 		    try{
 		        Process process;  

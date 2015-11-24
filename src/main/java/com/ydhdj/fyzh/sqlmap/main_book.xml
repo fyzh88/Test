@@ -36,8 +36,8 @@
 	
 	<!-- 插入book数据 -->
 	<insert id="insert" parameterType="BookInfoBean">
-		INSERT INTO itpdf_books(id,user_id,md,file_len,name,author,pages,publisher,category,shared_addr,share_code) 
-		VALUES(#{id},#{user_id},#{md},#{file_len},#{name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
+		INSERT INTO itpdf_books(id,user_id,md,file_len,name,save_name,author,pages,publisher,category,shared_addr,share_code) 
+		VALUES(#{id},#{user_id},#{md},#{file_len},#{name},#{save_name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
 	</insert>
 	
 	

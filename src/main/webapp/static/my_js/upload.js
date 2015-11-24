@@ -27,11 +27,12 @@ $(function(){
 		var shared_addr=$("#shared_addr").val();
 		var share_code=$("#share_code").val();
 		var md = $("#md").val(); 
+		var save_name=$("#saved_name").val();
 		
 		var dict={"name":name,"author":author,"publisher":publisher,
 				"pages":pages,"file_len":fileLen,"category":category,
 				"shared_addr":shared_addr,"share_code":share_code,"id":"",
-				"user_id":"","md":md};
+				"user_id":"","md":md,"save_name":save_name};
 		var post =JSON.stringify(dict);
 		$.ajax({
 			type:'POST',
@@ -39,7 +40,10 @@ $(function(){
 			data:post,
 			dataType:'json',
 			success:function(ret){},
-			contentType:"application/json"
+			contentType:"application/json",
+			complete:function(data){
+				$("#pdf_file").text("分享完成！");
+			}
 		});
 		
 	});

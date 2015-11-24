@@ -36,9 +36,9 @@
 			</form>
 		</div>
 		<div class="col-md-9">
-			<label id="pdf_file">${requestScope.upload_return_param['name'] }</label><br>
-			<label>PDF文件是否格式正确：${requestScope.upload_not_pdf_file }</label><br>
-			<label>PDF文件是否已经存在{MD5指纹识别}：${requestScope.upload_already_exist}</label>
+				<label id="pdf_file">${requestScope.upload_return_param['name'] }</label><br>
+				<label>不是PDF文件：${requestScope.upload_not_pdf_file }</label><br>
+				<label>PDF文件是否已经存在{MD5指纹识别}：${requestScope.upload_already_exist}</label>
 		</div>
 	</div>
 	
@@ -80,6 +80,7 @@
 		         <input id="share_code" type="text" class="form-control" placeholder="PDF文件的分享提取码" value="${requestScope.upload_return_param['share_code'] }">
 		     </div><br>
 		     <input id="md" type="hidden" value="${requestScope.upload_return_param['md'] }">
+		     <input id="saved_name" type="hidden" value="${requestScope.upload_return_param['save_name'] }">
 		     
 		     <button class="btn btn-success btn-lg pull-right" id="share_pdf">我要分享</button>	
 		</div>

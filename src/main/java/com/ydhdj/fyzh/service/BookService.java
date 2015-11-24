@@ -91,11 +91,11 @@ public class BookService {
 					//文件的原始名称
 					bib.setName(name);
 					//作者
-					bib.setAuthor("xxx");
+					bib.setAuthor("unkown");
 					//分类
 					bib.setCategory("C++");
 					//出版社
-					bib.setPublisher("xxxxx");
+					bib.setPublisher("unkown");
 					//分享地址
 					bib.setShared_addr("");
 					//分享提取码
