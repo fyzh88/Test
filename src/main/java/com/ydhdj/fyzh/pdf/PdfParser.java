@@ -100,10 +100,13 @@ public class PdfParser {
 		    builder.append(" output ").append(limitPageFileName).append(";");
 		    //convert the new PDF to image PAGE by PAGE
 		    builder.append("convert ").append(limitPageFileName).append(" ").append(md).append(".png;");
+		    //extract TEXT from new PDF
+		    builder.append("pdftotext -f 1 -l ").append(this.MAX_PDF_PAGES_TO_PIC).append(" \'");
+		    builder.append(limitPageFileName).append("\' ").append(md).append(".txt");
 		    //delete the template file
 		    builder.append("rm ").append(limitPageFileName).append(";");
 		    //move  all the PNG file to COVER PATH
-		    builder.append("mv *.png").append(" ").append(coverPath).append(";");
+		    builder.append("mv ").append(md).append("*.* ").append(coverPath).append(";");
 		    //task OVER!
 		    System.out.println(builder.toString());
 		    String shStr = builder.toString();
