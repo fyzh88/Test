@@ -6,4 +6,5 @@ public class CommonConst {
 	public static final String UPLOAD_RETURN_PARAM="upload_return_param";
 	public static final String UPLOAD_ALREADY_EXIST="upload_already_exist";
 	public static final String UPLOAD_NOT_PDF_FILE = "upload_not_pdf_file";
+	public static final String UPLOAD_PDFTOTEXT_STR = "upload_pdftotext_str";
 }

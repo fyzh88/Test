@@ -44,7 +44,8 @@
 	
 	<div class="row">
 		<div class="col-md-7">
-			<img alt="" src="${path}/static/img/dummy.png" class="img-rounded" width="400">
+			<!-- img alt="" src="${path}/static/img/dummy.png" class="img-rounded" width="400"-->
+			<textarea id ="pdftotext"rows="20" cols="60" >${requestScope.upload_pdftotext_str }</textarea>
 		</div>
 		<div class="col-md-5">
 			 <div class="input-group">

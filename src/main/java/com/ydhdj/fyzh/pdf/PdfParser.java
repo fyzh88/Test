@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.util.StringUtils;
 
 import com.itextpdf.text.pdf.PdfReader;
@@ -54,13 +55,22 @@ public class PdfParser {
 	}
 		
 	//获取目录摘要
-	public List<String> getBookmark() {
-		if(m_rd!=null){
+	public List<String> saveBookmark(final String dirPath,final String md) {
+		if(m_rd!=null && !StringUtils.isEmpty(dirPath) && !StringUtils.isEmpty(md)){
 			List<String> arr = new ArrayList<String>();
 			List<HashMap<String,Object>> bm = SimpleBookmark.getBookmark(m_rd);
 			if(bm != null){
 				for ( Iterator<HashMap<String,Object>> i = bm.iterator () ; i.hasNext () ; ) {
 				       showBookmark (( HashMap<String,Object> ) i.next (),arr) ;
+				}
+				//如果我们能从中提取出目录信息，我们就将目录信息保存在文件中，供后续访问使用
+				try {
+					File dir = new File(dirPath);
+					dir.mkdirs();
+					File dirFile = new File(dirPath,md);
+					FileUtils.writeStringToFile(dirFile, arr.toString());
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
 				return arr;
 			}
@@ -97,12 +107,12 @@ public class PdfParser {
 		    //get the first MAX_PDF_PAGES_TO_PIC page to a new PDF file
 		    builder.append("pdftk A=\'").append(fileName).append("\' cat A1-").append(this.MAX_PDF_PAGES_TO_PIC);
 		    String limitPageFileName = UUID.randomUUID().toString()+"_tmp.pdf";
-		    builder.append(" output ").append(limitPageFileName).append(";");
+		    builder.append(" output \'").append(limitPageFileName).append("\';");
 		    //convert the new PDF to image PAGE by PAGE
-		    builder.append("convert ").append(limitPageFileName).append(" ").append(md).append(".png;");
+		    builder.append("convert \'").append(limitPageFileName).append("\' \'").append(md).append(".png\';");
 		    //extract TEXT from new PDF
 		    builder.append("pdftotext -f 1 -l ").append(this.MAX_PDF_PAGES_TO_PIC).append(" \'");
-		    builder.append(limitPageFileName).append("\' ").append(md).append(".txt");
+		    builder.append(limitPageFileName).append("\' \'").append(md).append(".txt\'; ");
 		    //delete the template file
 		    builder.append("rm ").append(limitPageFileName).append(";");
 		    //move  all the PNG file to COVER PATH

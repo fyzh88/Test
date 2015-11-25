@@ -75,6 +75,23 @@ public class BookService {
 		}
 		return null;
 	}
+	//读取通过PdfToText工具提取出来的文本信息（我们只提取了前5页的文本信息）
+	public String readPdfToTextFile(String fileName){
+		if(StringUtils.isEmpty(fileName)){return "";}
+		File coverDir = new File(COVER_PATH);
+		coverDir.mkdirs();
+		StringBuilder builder = new StringBuilder(fileName);
+		builder.append(".txt");
+		File file = new File(coverDir,builder.toString());
+		if(file.exists()){
+			try {
+				return FileUtils.readFileToString(file);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return "";
+	}
 	//提取文件中的有用信息
 	public BookInfoBean extractBookInfo(File file,final String name){
 		if(file != null){
@@ -107,7 +124,8 @@ public class BookService {
 					PdfParser pp  = new PdfParser(file);
 					bib.setPages(pp.getPageNum());
 					pp.getMetaInfo();
-					pp.getBookmark();
+					//保存PDF文件的目录信息
+					pp.saveBookmark(DIRECTORY_PATH,strMd);
 					//生成前n页PDF缩略图
 					pp.savePdfCover(file,COVER_PATH,strMd);
 				}else{

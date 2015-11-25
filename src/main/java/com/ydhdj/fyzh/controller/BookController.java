@@ -52,6 +52,9 @@ public class BookController {
 				BookInfoBean bib = m_bs.extractBookInfo(uploadFfn,name);
 				if(bib != null){
 					mv.getModel().put(CommonConst.UPLOAD_RETURN_PARAM, bib);
+					//读取使用PdfToText工具读取出来的文本信息，为得输入作者和出版信息的时候方便
+					String strText = m_bs.readPdfToTextFile(bib.getMd());
+					mv.getModel().put(CommonConst.UPLOAD_PDFTOTEXT_STR,strText);
 				}else{
 				}
 				mv.getModel().put(CommonConst.UPLOAD_NOT_PDF_FILE,(bib==null));
