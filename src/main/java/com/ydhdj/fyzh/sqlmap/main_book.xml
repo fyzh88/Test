@@ -25,7 +25,7 @@
 	</select>
 	
 	<!-- 获取某PDF分类中的书籍信息 -->
-	<select id="getByCategory" resultType="BookInfoBean" parameterType="str">
+	<select id="getByCategory" resultType="BookInfoBean" parameterType="hashmap">
 		SELECT * FROM itpdf_books WHERE category=#{category} ORDER BY date DESC LIMIT #{limitCnt};
 	</select>
 	
@@ -33,7 +33,10 @@
 	<select id="getByMd" resultType="BookInfoBean" parameterType="str">
 		SELECT * FROM itpdf_books WHERE md=#{md};
 	</select>
-	
+	<!-- 依据id 获取数据 -->
+	<select id="getById" resultType="BookInfoBean" parameterType="str">
+		SELECT * FROM itpdf_books WHERE id=#{id};
+	</select>
 	<!-- 插入book数据 -->
 	<insert id="insert" parameterType="BookInfoBean">
 		INSERT INTO itpdf_books(id,user_id,md,file_len,name,save_name,author,pages,publisher,category,shared_addr,share_code) 

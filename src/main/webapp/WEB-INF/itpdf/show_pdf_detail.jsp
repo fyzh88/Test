@@ -21,31 +21,15 @@
 <script type="text/javascript" src="<c:url value='/static/bootstrap-3.3.4/js/bootstrap.min.js'/>"></script>
 </head>
 <body>
-	<c:set var="colCnt" value="4"></c:set>
-	<c:set var="total" value="${fn:length(requestScope.main_books_of_category_perpage)}"></c:set>
-	<c:set var="rowCnt" value="${(total/colCnt) > 5 ? 5:( total/colCnt)}"></c:set>
-	<c:forEach var="rowIndex"  begin="1" end="${rowCnt }" step ="1" >
 	<div class="row">
-		<c:forEach var="colIndex"  begin="1" end="${colCnt }" step ="1">
-			<div class="col-md-3">
-				<c:set var="index" value="${4*(rowIndex-1)+(colIndex-1) }"></c:set>
-				<a href="show_pdf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }">
-				<img src="static/img/dummy.png" class="img-thumbnail"/>
-					${requestScope.main_books_of_category_perpage[index]['name'] }
-				</a>
-			</div>
-		</c:forEach>
-	</div>
-	</c:forEach>
-	
-	<div class="col-md-12">
-		 <ul class="pagination pagination-lg">
-		  <li><a href="#">&laquo;</a></li>
-		  <c:forEach varStatus="number"  begin="1" end="${total/(colCnt*rowCnt) }" step="1">
-		 	 <li><a href="#">${number.count }</a></li>
-		  </c:forEach>
-		  <li><a href="#">&raquo;</a></li>
-		</ul><br>
+	<a>${requestScope.pdf_detail_book_info['id'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['name'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['author'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['md'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['save_name'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['publisher'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['pages'] }</a><br>
+	<a>${requestScope.pdf_detail_book_info['file_len'] }</a>
 	</div>
 </body>
 </html>

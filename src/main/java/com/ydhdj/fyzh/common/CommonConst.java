@@ -7,4 +7,7 @@ public class CommonConst {
 	public static final String UPLOAD_ALREADY_EXIST="upload_already_exist";
 	public static final String UPLOAD_NOT_PDF_FILE = "upload_not_pdf_file";
 	public static final String UPLOAD_PDFTOTEXT_STR = "upload_pdftotext_str";
+	
+	public static final String MAIN_BOOKS_OF_CATEGORY_PERPAGE = "main_books_of_category_perpage";
+	public static final String PDF_DETAIL_BOOK_INFO = "pdf_detail_book_info";
 }

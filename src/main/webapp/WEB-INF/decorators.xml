@@ -8,5 +8,7 @@
 		<pattern>/show_main</pattern>
 		<pattern>/upload_pdf</pattern>
 		<pattern>/share_pdf</pattern>
+		<pattern>/show_pdf</pattern>
+		<pattern>/show_not_exist</pattern>
 	</decorator>
 </decorators>

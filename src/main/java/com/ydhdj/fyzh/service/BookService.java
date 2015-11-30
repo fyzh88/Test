@@ -156,18 +156,6 @@ public class BookService {
 		return null;
 		
 	}
-	//依据文件的消息摘要获取
-	private List<BookInfoBean> getByMd(final String md){
-		if(md != null){
-			SqlSession ss = sqlSessionFactory.openSession();
-			try{
-				return ss.selectList("itpdf_main.getByMd",md);
-			}finally{
-				if(ss!= null){ss.close();}
-			}
-		}
-		return Collections.emptyList();
-	}
 	//PDF目录信息存盘
 	private String saveBookmarks(final List<String> bm,final String name){
 		if(bm != null){
@@ -186,7 +174,31 @@ public class BookService {
 		}
 		return "";
 	}
-	
+
+	//
+	public BookInfoBean getById(final String id){
+		if(StringUtils.isEmpty(id)){return null;}
+		SqlSession ss = sqlSessionFactory.openSession();
+		try{
+			return ss.selectOne("itpdf_main.getById",id);
+		}catch(Exception e){}
+		finally{
+			if(ss != null){ss.close();}
+		}
+		return null;
+	}
+	//依据文件的消息摘要获取
+	public List<BookInfoBean> getByMd(final String md){
+		if(md != null){
+			SqlSession ss = sqlSessionFactory.openSession();
+			try{
+				return ss.selectList("itpdf_main.getByMd",md);
+			}finally{
+				if(ss!= null){ss.close();}
+			}
+		}
+		return Collections.emptyList();
+	}
 	//获取所有书籍的分类信息
 	public List<Map<String,String>> getAllCategory(Integer limitCnt){
 		SqlSession ss = sqlSessionFactory.openSession();
@@ -198,7 +210,7 @@ public class BookService {
 		
 	}
 	//获取某分类中PDF书籍信息
-	public List<BookInfoBean> getByCategroy(final String category,int limitCnt){
+	public List<BookInfoBean> getByCategroy(final String category,Integer limitCnt){
 		if(!StringUtils.isEmpty(category)){
 			SqlSession ss = sqlSessionFactory.openSession();
 			try{

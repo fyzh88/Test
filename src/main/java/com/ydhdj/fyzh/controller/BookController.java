@@ -1,12 +1,15 @@
 package com.ydhdj.fyzh.controller;
 
 import java.io.File;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,10 +28,34 @@ public class BookController {
 	
 	@RequestMapping("/show_main")
 	public ModelAndView showMain(){
-		//选中第一个分类，并显示该分类中的内容
-		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("upload");
+		//选中第一个分类，并显示该分类中的内容
+		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+		List<Map<String,String>> category = m_bs.getAllCategory(1);
+		if(category != null && !category.isEmpty()){
+			String str_category = category.get(0).get("category");
+			//按照类型取出所有的书籍数据
+			List<BookInfoBean> books = m_bs.getByCategroy(str_category, 20);
+			mv.getModel().put(CommonConst.MAIN_BOOKS_OF_CATEGORY_PERPAGE, books);
+			//每行4本，显示5行
+		}else{
+			//此分类中没有任何的PDF文件
+		}
+		mv.setViewName("show_category_detail");
+		return mv;
+	}
+	//显示一个PDF文件的详细内容
+	@RequestMapping("/show_pdf")
+	public ModelAndView showPdfOf(final String bookId){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(bookId)){
+			mv.setViewName("show_not_exist");
+		}else{
+			BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+			BookInfoBean bi = m_bs.getById(bookId);
+			mv.getModel().put(CommonConst.PDF_DETAIL_BOOK_INFO, bi);
+			mv.setViewName("show_pdf_detail");
+		}
 		return mv;
 	}
 	//上传文件功能目前的打算是只为自己方便构建数据库数据而引入
