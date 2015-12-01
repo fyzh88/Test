@@ -1,6 +1,8 @@
 package com.ydhdj.fyzh.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -8,6 +10,9 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -25,6 +30,7 @@ import com.ydhdj.fyzh.utils.SpringContextUtils;
 
 @Controller("/")
 public class BookController {
+	private static final Logger log = LoggerFactory.getLogger(BookController.class);
 	
 	@RequestMapping("/show_main")
 	public ModelAndView showMain(){
@@ -40,6 +46,7 @@ public class BookController {
 			//每行4本，显示5行
 		}else{
 			//此分类中没有任何的PDF文件
+			log.error("There is not any book in this categaory");
 		}
 		mv.setViewName("show_category_detail");
 		return mv;
@@ -54,10 +61,47 @@ public class BookController {
 			BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
 			BookInfoBean bi = m_bs.getById(bookId);
 			mv.getModel().put(CommonConst.PDF_DETAIL_BOOK_INFO, bi);
+			mv.getModel().put(CommonConst.PDF_TEXT_INFO, m_bs.getPdfText(bookId));
 			mv.setViewName("show_pdf_detail");
 		}
 		return mv;
 	}
+	//显示PDF文件的第一页图片
+	@RequestMapping("/getPdfImageOf")
+	public void getPdfImageOf(HttpServletRequest request,HttpServletResponse response,final String bookId, int pageIndex){
+		if(StringUtils.isEmpty(bookId)){return;}
+		if(pageIndex >= 5){pageIndex = 4 ;}//我们仅仅生成了前5页的图片文件
+		if(pageIndex < 0){pageIndex = 0;}
+		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+		File imageFile = m_bs.getPdfImageOf(bookId,pageIndex);
+		if(imageFile == null){//所请求的PDF页图片不存在，我们应该采用默认替代
+			imageFile = m_bs.getDummyPng();
+		}
+		if(imageFile != null){
+			OutputStream os  = null;
+			try{
+				os = response.getOutputStream();
+				response.reset();
+				response.setHeader("Content-Disposition", "attachment; filename=xxxxxxx.png");
+				response.setContentType("application/octet-stream; charset=utf-8");
+			    os.write(FileUtils.readFileToByteArray(imageFile));
+			    os.flush();
+			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e.getMessage());
+			}finally{
+				try {
+				if(os != null){
+					os.close();
+				}} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}else{
+			log.error("ERROR,when get the png image!");
+		}
+	}
+	
 	//上传文件功能目前的打算是只为自己方便构建数据库数据而引入
 	@RequestMapping("upload_pdf")
 	public ModelAndView uploadPdf(@RequestParam(value="file", required=false)MultipartFile file,
@@ -87,6 +131,7 @@ public class BookController {
 				mv.getModel().put(CommonConst.UPLOAD_NOT_PDF_FILE,(bib==null));
 			}else{
 				//存盘失败
+				log.error("Save Pdf file Failed!");
 			}
 		}else{
 			//如果在数据库中已经存在了这本PDF文件的数据，那么我们可以简单的进行忽略

@@ -30,7 +30,7 @@
 			<div class="col-md-3">
 				<c:set var="index" value="${4*(rowIndex-1)+(colIndex-1) }"></c:set>
 				<a href="show_pdf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }">
-				<img src="static/img/dummy.png" class="img-thumbnail"/>
+				<img src="getPdfImageOf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }&pageIndex=0" class="img-thumbnail" >
 					${requestScope.main_books_of_category_perpage[index]['name'] }
 				</a>
 			</div>
@@ -39,7 +39,7 @@
 	</c:forEach>
 	
 	<div class="col-md-12">
-		 <ul class="pagination pagination-lg">
+		 <ul class="pagination pagination">
 		  <li><a href="#">&laquo;</a></li>
 		  <c:forEach varStatus="number"  begin="1" end="${total/(colCnt*rowCnt) }" step="1">
 		 	 <li><a href="#">${number.count }</a></li>

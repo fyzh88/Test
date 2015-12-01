@@ -14,6 +14,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +30,7 @@ public class BookService {
     public static  String COVER_PATH; /** 封面图片路径 */    
     public static  String DIRECTORY_PATH;/** PDF目录文件路径*/
     public static  String UPLOAD_PDF_PATH;/** 上传PDF文件暂存路径*/
-    
+    private static final Logger log = LoggerFactory.getLogger(BookService.class);
     static {
         try {
             DefaultConfiguration config = new DefaultConfiguration("server-config.properties").load();
@@ -37,7 +39,7 @@ public class BookService {
             UPLOAD_PDF_PATH=config.get("upload_pdf_path","/home/fyzh/itpdf/itpdf_upload");//PDF上传保存路径
             
         } catch (Exception ex) {
-            //LOG.error("Upload file path read failure, check if property file named 'server-config.properties' exists.");
+            log.error("Upload file path read failure, check if property file named 'server-config.properties' exists.");
         }
     }
 	private SqlSessionFactory sqlSessionFactory;
@@ -71,6 +73,7 @@ public class BookService {
 				
 			} catch (Exception e) {
 				e.printStackTrace();
+				log.error(e.toString());
 			}			
 		}
 		return null;
@@ -88,6 +91,7 @@ public class BookService {
 				return FileUtils.readFileToString(file);
 			} catch (IOException e) {
 				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 		return "";
@@ -135,6 +139,7 @@ public class BookService {
 			}
 			catch(Exception e){
 				e.printStackTrace();
+				log.error(e.toString());
 			}
 		}
 		return null;
@@ -152,6 +157,7 @@ public class BookService {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			log.error(e.toString());
 		}
 		return null;
 		
@@ -169,19 +175,74 @@ public class BookService {
 				FileUtils.writeStringToFile(file, str_bm);
 			} catch (IOException e) {
 				e.printStackTrace();
+				log.error(e.toString());
 			}
 			return builder.toString();//存储目录文件的名称
 		}
 		return "";
 	}
-
+	//获取PDF文本信息
+	public String getPdfText(final String bookId){
+		if(StringUtils.isEmpty(bookId)){return "No Text Here!";}
+		BookInfoBean bi = getById(bookId);
+		if(bi != null){
+			String md = bi.getMd();
+			File dir = new File(DIRECTORY_PATH);
+			dir.mkdirs();
+			File textFile = new File(dir,md);
+			if(textFile.exists()){
+				try {
+					return FileUtils.readFileToString(textFile);
+				} catch (IOException e) {
+					e.printStackTrace();
+					log.error(e.getMessage());
+				}
+			}
+		}
+		return "No Text Here!";
+	}
+	//获取PDF图片
+	public File getPdfImageOf(final String bookId,int pageIndex){
+		if(StringUtils.isEmpty(bookId)){return null;}
+		if(pageIndex >= 5){pageIndex = 4 ;}//我们仅仅生成了前5页的图片文件
+		if(pageIndex < 0){pageIndex = 0;}
+		BookInfoBean bi = getById(bookId);
+		if(bi != null){
+			String md = bi.getMd();
+			StringBuilder imageName = new StringBuilder(md);
+			imageName.append("-").append(pageIndex).append(".png");
+			File dir = new File(COVER_PATH);
+			dir.mkdirs();
+			File imageFile = new File(dir,imageName.toString());
+			if(imageFile.exists()){
+				return imageFile;
+			}else{
+				log.error("ERROR!, imageFile not exist!");
+			}
+		}else{}
+		return null;
+	}
+	//获取dummy PNG
+	public File getDummyPng(){
+		File dir = new File(COVER_PATH);
+		dir.mkdirs();
+		File imageFile = new File(dir,"dummy.png");
+		if(imageFile.exists()){
+			return imageFile;
+		}else{
+			log.error("dummy PNG file not exist!");
+		}
+		return null;
+	}
 	//
 	public BookInfoBean getById(final String id){
 		if(StringUtils.isEmpty(id)){return null;}
 		SqlSession ss = sqlSessionFactory.openSession();
 		try{
 			return ss.selectOne("itpdf_main.getById",id);
-		}catch(Exception e){}
+		}catch(Exception e){
+			log.error(e.toString());
+		}
 		finally{
 			if(ss != null){ss.close();}
 		}

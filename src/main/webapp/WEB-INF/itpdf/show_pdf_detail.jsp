@@ -22,14 +22,28 @@
 </head>
 <body>
 	<div class="row">
-	<a>${requestScope.pdf_detail_book_info['id'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['name'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['author'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['md'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['save_name'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['publisher'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['pages'] }</a><br>
-	<a>${requestScope.pdf_detail_book_info['file_len'] }</a>
+		<div class="col-md-6">
+			<c:forEach varStatus="imgIndex" begin="0" end="4" step= "1" >
+				<img alt="${requestScope.pdf_detail_book_info['name'] }" src="getPdfImageOf?bookId=${requestScope.pdf_detail_book_info['id'] }&pageIndex=${imgIndex.count}" class="img-thumbnail">
+			</c:forEach>
+		</div>
+		<div class="col-md-6">
+			<div class="well">
+				<h4>书籍名称：${requestScope.pdf_detail_book_info['name'] }</h4>
+				<h3>作者：${requestScope.pdf_detail_book_info['author'] }</h3>
+				<h4>出版社：${requestScope.pdf_detail_book_info['publisher'] }</h4>
+				<h4>页数：${requestScope.pdf_detail_book_info['pages'] } 页</h4>
+				<h4>文件大小：${requestScope.pdf_detail_book_info['file_len'] }字节</h4>
+				<h4>分类标签：${requestScope.pdf_detail_book_info['category'] }</h4>
+			</div>
+			<div class="well">
+				<p>${requestScope.pdf_text_info }</p>
+			</div>
+			<div class="well">
+				<h3>分享地址：<a href="${requestScope.pdf_detail_book_info['shared_addr'] }">获取</a></h3>
+				<h3>提取码：${requestScope.pdf_detail_book_info['share_code'] }</h3>
+			</div>
+		</div>
 	</div>
 </body>
 </html>
