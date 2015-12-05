@@ -30,7 +30,8 @@
 			<div class="col-md-3">
 				<c:set var="index" value="${4*(rowIndex-1)+(colIndex-1) }"></c:set>
 				<a href="show_pdf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }">
-				<img src="getPdfImageOf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }&pageIndex=0" class="img-thumbnail" >
+				<img src="getPdfImageOf?bookId=${requestScope.main_books_of_category_perpage[index]['id'] }&pageIndex=0" 
+				           class="img-thumbnail" alt="${requestScope.main_books_of_category_perpage[index]['name'] }">
 					${requestScope.main_books_of_category_perpage[index]['name'] }
 				</a>
 			</div>

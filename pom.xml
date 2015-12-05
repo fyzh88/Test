@@ -246,6 +246,7 @@
 		                	<directory>src/main/webapp</directory>  
 		                </resource>  
 		            </webResources>  
+		            <warName>itpdf</warName>
 		        </configuration>  
 			</plugin>
 			<plugin>

@@ -15,6 +15,20 @@ $(function(){
 		}	
 	});
 	/**
+	 * 提取分享地址
+	 */
+	$("#shared_addr").change(function(){
+		var addr_w = $(this).val();
+		var addr_12 = addr_w.split(" ");
+		var addr_1 = addr_12[0];
+		var addr_2 = addr_12[1];
+		$(this).val(addr_1);
+		var addr_code = addr_2.split("：");
+		var realcode=addr_code[1];
+		var lastPart = realcode.substr(0,4);
+		$("#share_code").val(lastPart);
+	});
+	/**
 	 * 分享文件
 	 */
 	$("#share_pdf").click(function(){

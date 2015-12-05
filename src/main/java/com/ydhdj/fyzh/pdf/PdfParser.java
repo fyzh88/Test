@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
 import org.springframework.util.StringUtils;
 
 import com.itextpdf.text.pdf.PdfReader;
@@ -26,18 +27,35 @@ public class PdfParser {
 	private static final int MAX_PDF_PAGES_TO_PIC = 5; //提取PDF文件中前多少页为图片
 	public PdfParser(final File file){
 		if(m_rd == null){
-			try {
+			/*try {
 				InputStream is = new FileInputStream(file);
 				m_rd = new PdfReader(is);
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 		}
 	}
 	//获取页码
-	public int getPageNum(){
+	public int getPageNum(final File pdfFile){
 		if(m_rd != null){
 			return m_rd.getNumberOfPages();
+		}else{
+			return getPageNumberFromShell(pdfFile);
+		}
+	}
+	//
+	private int getPageNumberFromShell(final File pdfFile){
+		if(pdfFile == null){return 0;}
+		String pdfDir = pdfFile.getParent();
+		String fn = pdfFile.getName();
+		StringBuilder builder = new StringBuilder();
+		builder.append("cd ").append(pdfDir).append(";");
+		builder.append("pdfinfo \"").append(fn).append("\" |grep Pages:|cut -d \":\" -f 2;");
+		List<String> ret = executeShellCmd(builder.toString());
+		if(ret != null && !ret.isEmpty()){
+			String strNum = ret.get(0);
+			strNum = strNum.trim();
+			return Integer.valueOf(strNum);
 		}
 		return 0;
 	}
@@ -100,7 +118,6 @@ public class PdfParser {
 		dir.mkdirs();
 		String fileName= pdfFile.getName();
 		String pdfDir = pdfFile.getParent();
-		    List<String> strList = new ArrayList();  		  
 		    StringBuilder builder = new StringBuilder();
 		    //change the directory
 		    builder.append("cd ").append(pdfDir).append(";");
@@ -120,7 +137,13 @@ public class PdfParser {
 		    //task OVER!
 		    System.out.println(builder.toString());
 		    String shStr = builder.toString();
-		    try{
+		 executeShellCmd(shStr);
+	}
+	//
+	private List<String> executeShellCmd(final String shStr){
+		if(StringUtils.isEmpty(shStr)){return Collections.emptyList();}
+		 List<String> strList = new ArrayList();  	
+		   try{
 		        Process process;  
 		        process = Runtime.getRuntime().exec(new String[]{"/bin/sh","-c",shStr},null,null);  
 		        InputStreamReader ir = new InputStreamReader(process  
@@ -131,7 +154,8 @@ public class PdfParser {
 		        while ((line = input.readLine()) != null){  
 		            strList.add(line);  
 		        }  
-		        System.out.print(strList.toString());
+		        System.out.print("\nexecute shell result is :"+strList.toString());
 		    }catch(Exception e){e.printStackTrace();}
+		   return strList;
 	}
 }

@@ -114,7 +114,7 @@ public class BookService {
 					//作者
 					bib.setAuthor("unkown");
 					//分类
-					bib.setCategory("C++");
+					bib.setCategory("windows");
 					//出版社
 					bib.setPublisher("unkown");
 					//分享地址
@@ -126,8 +126,7 @@ public class BookService {
 					bib.setMd(strMd);
 					//文件页数
 					PdfParser pp  = new PdfParser(file);
-					bib.setPages(pp.getPageNum());
-					pp.getMetaInfo();
+					bib.setPages(pp.getPageNum(file));
 					//保存PDF文件的目录信息
 					pp.saveBookmark(DIRECTORY_PATH,strMd);
 					//生成前n页PDF缩略图

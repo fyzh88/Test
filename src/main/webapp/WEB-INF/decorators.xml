@@ -10,5 +10,6 @@
 		<pattern>/share_pdf</pattern>
 		<pattern>/show_pdf</pattern>
 		<pattern>/show_not_exist</pattern>
+		<pattern>/show_upload</pattern>
 	</decorator>
 </decorators>

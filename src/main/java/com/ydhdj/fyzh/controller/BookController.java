@@ -66,6 +66,12 @@ public class BookController {
 		}
 		return mv;
 	}
+	@RequestMapping("/show_upload")
+	public ModelAndView showUploadPage(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("upload");
+		return mv;
+	}
 	//显示PDF文件的第一页图片
 	@RequestMapping("/getPdfImageOf")
 	public void getPdfImageOf(HttpServletRequest request,HttpServletResponse response,final String bookId, int pageIndex){

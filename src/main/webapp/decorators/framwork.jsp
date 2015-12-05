@@ -64,14 +64,14 @@
 				
 			</h4>
 			<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
-			
+			<a href="show_upload" class="pull-right">上传PDF</a>
 		</div>
 	</div>
 	<br>
 	<!-- logo区域 -->
 	<div class="row">
 		<div class="col-md-4" >
-			<img alt="" src="static/img/logo.png">
+			<img alt="itpdf logo" src="static/img/logo.png">
 		</div>
 		<div class="col-md-4 col-md-offset-4">
 			 <div class="input-group">

@@ -23,7 +23,7 @@
 <body>
 	<div class="row">
 		<div class="col-md-6">
-			<c:forEach varStatus="imgIndex" begin="0" end="4" step= "1" >
+			<c:forEach varStatus="imgIndex" begin="0" end="0" step= "1" >
 				<img alt="${requestScope.pdf_detail_book_info['name'] }" src="getPdfImageOf?bookId=${requestScope.pdf_detail_book_info['id'] }&pageIndex=${imgIndex.count}" class="img-thumbnail">
 			</c:forEach>
 		</div>
@@ -37,7 +37,7 @@
 				<h4>分类标签：${requestScope.pdf_detail_book_info['category'] }</h4>
 			</div>
 			<div class="well">
-				<p>${requestScope.pdf_text_info }</p>
+				<!-- p>${requestScope.pdf_text_info }</p-->
 			</div>
 			<div class="well">
 				<h3>分享地址：<a href="${requestScope.pdf_detail_book_info['shared_addr'] }">获取</a></h3>
