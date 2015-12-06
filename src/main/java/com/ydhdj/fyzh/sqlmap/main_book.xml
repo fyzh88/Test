@@ -26,9 +26,13 @@
 	
 	<!-- 获取某PDF分类中的书籍信息 -->
 	<select id="getByCategory" resultType="BookInfoBean" parameterType="hashmap">
-		SELECT * FROM itpdf_books WHERE category=#{category} ORDER BY date DESC LIMIT #{limitCnt};
+		SELECT * FROM itpdf_books WHERE category=#{category} ORDER BY date DESC LIMIT #{start},#{limitCnt};
 	</select>
 	
+	<!-- 获取某个分类中的PDF文件数量 -->
+	<select id="getTotalInCategory" resultType="hashmap" parameterType="str">
+		SELECT COUNT(0) AS cnt FROM itpdf_books WHERE category=#{category};
+	</select>
 	<!--依据文件的消息摘要获取-->
 	<select id="getByMd" resultType="BookInfoBean" parameterType="str">
 		SELECT * FROM itpdf_books WHERE md=#{md};

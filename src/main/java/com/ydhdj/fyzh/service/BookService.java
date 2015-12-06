@@ -269,14 +269,30 @@ public class BookService {
 		}
 		
 	}
+	//获取某分类中的PDF总数量
+	public Long getTotalInCategory(final String category){
+		if(StringUtils.isEmpty(category)){return 0L;}
+		SqlSession ss = sqlSessionFactory.openSession();
+		try{
+			HashMap<String,Long> result =ss.selectOne("itpdf_main.getTotalInCategory",category);
+			if(result != null && !result.isEmpty()){
+				Long cnt = result.get("cnt");
+				return cnt;
+			}
+		}finally{
+			if(ss != null){ss.close();}
+		}
+		return 0L;
+	}
 	//获取某分类中PDF书籍信息
-	public List<BookInfoBean> getByCategroy(final String category,Integer limitCnt){
+	public List<BookInfoBean> getByCategroy(final String category,Integer start,Integer limitCnt){
 		if(!StringUtils.isEmpty(category)){
 			SqlSession ss = sqlSessionFactory.openSession();
 			try{
 				HashMap<String,Object> parameter = new HashMap<String,Object>();
 				parameter.put("category",category);
 				parameter.put("limitCnt", limitCnt);
+				parameter.put("start", start);
 				return ss.selectList("itpdf_main.getByCategory",parameter);
 			}finally{
 				if(ss != null){ss.close();}

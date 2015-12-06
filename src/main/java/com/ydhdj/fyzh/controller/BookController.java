@@ -31,7 +31,7 @@ import com.ydhdj.fyzh.utils.SpringContextUtils;
 @Controller("/")
 public class BookController {
 	private static final Logger log = LoggerFactory.getLogger(BookController.class);
-	
+	private static final int COUNT_PDF_PER_PAGE = 20;
 	@RequestMapping("/show_main")
 	public ModelAndView showMain(){
 		ModelAndView mv = new ModelAndView();
@@ -41,8 +41,10 @@ public class BookController {
 		if(category != null && !category.isEmpty()){
 			String str_category = category.get(0).get("category");
 			//按照类型取出所有的书籍数据
-			List<BookInfoBean> books = m_bs.getByCategroy(str_category, 20);
+			List<BookInfoBean> books = m_bs.getByCategroy(str_category, 0,COUNT_PDF_PER_PAGE);
+			Long total = m_bs.getTotalInCategory(str_category);
 			mv.getModel().put(CommonConst.MAIN_BOOKS_OF_CATEGORY_PERPAGE, books);
+			mv.getModel().put(CommonConst.TOTAL_IN_CATEGORY, total);
 			//每行4本，显示5行
 		}else{
 			//此分类中没有任何的PDF文件
@@ -73,12 +75,25 @@ public class BookController {
 		return mv;
 	}
 	@RequestMapping("/show_category")
-	public ModelAndView showCategoryOf(final String category){
+	public ModelAndView showCategoryOf(final String category,int start, int curPageIndex){
+		if(start < 0 ){start = 0;}
+		if(curPageIndex <=  0){curPageIndex=0;}
 		ModelAndView mv = new ModelAndView();
 		if(!StringUtils.isEmpty(category)){
 			BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
-			List<BookInfoBean> books = m_bs.getByCategroy(category, 20);
+			List<BookInfoBean> books = m_bs.getByCategroy(category, start,COUNT_PDF_PER_PAGE);
+			Long total = m_bs.getTotalInCategory(category);
+			//约束curPageIndex
+			Long pageCnt = total/COUNT_PDF_PER_PAGE;
+			Long mode = total%COUNT_PDF_PER_PAGE;
+			if(mode == 0){pageCnt--;}
+			if(pageCnt < 0){pageCnt = 0L;}			
+			if(curPageIndex>pageCnt){curPageIndex = pageCnt.intValue();}
+			//
 			mv.getModel().put(CommonConst.MAIN_BOOKS_OF_CATEGORY_PERPAGE, books);
+			mv.getModel().put(CommonConst.TOTAL_IN_CATEGORY,total);
+			mv.getModel().put(CommonConst.CURRENT_PAGE_INDEX, curPageIndex);
+			//
 			mv.setViewName("show_category_detail");
 		}else{
 			mv.setViewName("show_not_exist");
@@ -164,11 +179,11 @@ public class BookController {
 	@RequestMapping("/share_pdf")
 	public ModelAndView sharePdf(@RequestBody BookInfoBean bib){
 		ModelAndView mv = new ModelAndView();
-		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
 		//为了安全起见，还是在此处处理ID等敏感信息吧
 		String id = UUID.randomUUID().toString();
 		bib.setId(id);		
 		bib.setUser_id("fec8a497-48ac-11e5-8b13-f56105f7c907");//fyzh		
+		BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
 		m_bs.insertPdfInfo(bib);
 		//
 		AttachmentService as = (AttachmentService)SpringContextUtils.getBean("attach_service");

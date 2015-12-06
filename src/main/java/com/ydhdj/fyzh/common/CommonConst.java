@@ -11,4 +11,6 @@ public class CommonConst {
 	public static final String MAIN_BOOKS_OF_CATEGORY_PERPAGE = "main_books_of_category_perpage";
 	public static final String PDF_DETAIL_BOOK_INFO = "pdf_detail_book_info";
 	public static final String PDF_TEXT_INFO = "pdf_text_info";
+	public static final String TOTAL_IN_CATEGORY="total_in_category";
+	public static final String CURRENT_PAGE_INDEX="current_page_index";
 }

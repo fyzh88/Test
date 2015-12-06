@@ -92,7 +92,7 @@
 			<div class="list-group">
 				<div class="list-group-item active"><i class="glyphicon glyphicon-th">&nbsp;PDF文件分类</i></div>
 				<c:forEach items="${requestScope.all_category}" var="item" varStatus="index">
-				    <c:url value="/show_category?category=${item['category']}" var="url"></c:url>
+				    <c:url value="/show_category?category=${item['category']}&start=0&curPageIndex=0" var="url"></c:url>
 					<div class="list-group-item"><a href="${url }">${item['category']}(${item['cnt']})</a></div>
 				</c:forEach>
 			</div>
