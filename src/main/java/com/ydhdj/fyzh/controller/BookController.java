@@ -72,6 +72,20 @@ public class BookController {
 		mv.setViewName("upload");
 		return mv;
 	}
+	@RequestMapping("/show_category")
+	public ModelAndView showCategoryOf(final String category){
+		ModelAndView mv = new ModelAndView();
+		if(!StringUtils.isEmpty(category)){
+			BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+			List<BookInfoBean> books = m_bs.getByCategroy(category, 20);
+			mv.getModel().put(CommonConst.MAIN_BOOKS_OF_CATEGORY_PERPAGE, books);
+			mv.setViewName("show_category_detail");
+		}else{
+			mv.setViewName("show_not_exist");
+		}
+		
+		return mv;
+	}
 	//显示PDF文件的第一页图片
 	@RequestMapping("/getPdfImageOf")
 	public void getPdfImageOf(HttpServletRequest request,HttpServletResponse response,final String bookId, int pageIndex){

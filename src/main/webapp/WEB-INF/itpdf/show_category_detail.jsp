@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="keywords" content="it pdf download  ">
-<meta name="description" content="it行业pdf文件分享下载平台">
 <title>ITPDF</title>
 <link rel="stylesheet" href="<c:url value='/static/bootstrap-3.3.4/css/bootstrap.min.css'/>"/>
 <link rel="stylesheet" href="<c:url value='/static/css/main.css'/>"/>
@@ -23,8 +21,9 @@
 <body>
 	<c:set var="colCnt" value="4"></c:set>
 	<c:set var="total" value="${fn:length(requestScope.main_books_of_category_perpage)}"></c:set>
-	<c:set var="rowCnt" value="${(total/colCnt) > 5 ? 5:( total/colCnt)}"></c:set>
-	<c:forEach var="rowIndex"  begin="1" end="${rowCnt }" step ="1" >
+	<c:set var="pages"></c:set>
+	<c:set var="rowCnt" value="${((total/colCnt) > 4 )? 4:( total/colCnt)}"></c:set>
+	<c:forEach var="rowIndex"  begin="1" end="${rowCnt+1 }" step ="1" >
 	<div class="row">
 		<c:forEach var="colIndex"  begin="1" end="${colCnt }" step ="1">
 			<div class="col-md-3">
@@ -39,14 +38,22 @@
 	</div>
 	</c:forEach>
 	
-	<div class="col-md-12">
-		 <ul class="pagination pagination">
-		  <li><a href="#">&laquo;</a></li>
-		  <c:forEach varStatus="number"  begin="1" end="${total/(colCnt*rowCnt) }" step="1">
-		 	 <li><a href="#">${number.count }</a></li>
-		  </c:forEach>
-		  <li><a href="#">&raquo;</a></li>
-		</ul><br>
-	</div>
+	<c:choose>
+		<c:when test="${total > (colCnt*rowCnt) }">
+			<div class="col-md-12">
+				 <ul class="pagination pagination">
+				  <li><a href="#">&laquo;</a></li>
+				  <c:forEach varStatus="number"  begin="1" end="${total/(colCnt*rowCnt) }" step="1">
+				 	 <li><a href="#">${number.count }</a></li>
+				  </c:forEach>
+				  <li><a href="#">&raquo;</a></li>
+				</ul><br>
+			</div>
+		</c:when>
+		<c:otherwise>
+			
+		</c:otherwise>
+	</c:choose>
+	
 </body>
 </html>

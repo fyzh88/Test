@@ -11,5 +11,6 @@
 		<pattern>/show_pdf</pattern>
 		<pattern>/show_not_exist</pattern>
 		<pattern>/show_upload</pattern>
+		<pattern>/show_category</pattern>
 	</decorator>
 </decorators>

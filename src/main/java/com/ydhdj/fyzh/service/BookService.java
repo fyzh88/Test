@@ -114,7 +114,7 @@ public class BookService {
 					//作者
 					bib.setAuthor("unkown");
 					//分类
-					bib.setCategory("windows");
+					bib.setCategory("headfirst");
 					//出版社
 					bib.setPublisher("unkown");
 					//分享地址

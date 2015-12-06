@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%>
 <%@ page import="com.ydhdj.fyzh.service.CommonService" %>
+<%@ page import="java.sql.*" %>
 <%
 	CommonService cs = new CommonService();
 	cs.init(request);
@@ -71,7 +72,9 @@
 	<!-- logo区域 -->
 	<div class="row">
 		<div class="col-md-4" >
+		<a href="${path }/show_main">
 			<img alt="itpdf logo" src="static/img/logo.png">
+		</a>
 		</div>
 		<div class="col-md-4 col-md-offset-4">
 			 <div class="input-group">
@@ -89,7 +92,8 @@
 			<div class="list-group">
 				<div class="list-group-item active"><i class="glyphicon glyphicon-th">&nbsp;PDF文件分类</i></div>
 				<c:forEach items="${requestScope.all_category}" var="item" varStatus="index">
-					<div class="list-group-item"><a href="">${item['category']}(${item['cnt']})</a></div>
+				    <c:url value="/show_category?category=${item['category']}" var="url"></c:url>
+					<div class="list-group-item"><a href="${url }">${item['category']}(${item['cnt']})</a></div>
 				</c:forEach>
 			</div>
 		</div>
