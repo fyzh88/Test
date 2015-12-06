@@ -108,15 +108,18 @@
 		<div class="col-md-11">
 		</div>
 		<div class="col-md-1">
-			<a href="#">免责声明</a>
-			<a href="#">意见反馈</a>
-			<a href="#">联系我们</a>
+			<c:url var="disclaimerUrl" value="/show_disclaimer"></c:url>
+			<a href="${disclaimerUrl }">免责声明</a>
+			<c:url var="adviceUrl" value="/show_advice"></c:url>
+			<a href="${adviceUrl }">意见反馈</a>
+			<c:url var="contactUrl" value="/show_contact"></c:url>
+			<a href="${contactUrl }">联系我们</a>
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12">
 			   <div style="text-align:center;">
-			      <h4>Copyright &copy; 2015-2020    All Rights Reserved. </h4>
+			      <h6>Copyright &copy; 2015-2020    All Rights Reserved. </h6>
 			   </div>
 		</div>
 	</div>

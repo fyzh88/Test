@@ -12,5 +12,8 @@
 		<pattern>/show_not_exist</pattern>
 		<pattern>/show_upload</pattern>
 		<pattern>/show_category</pattern>
+		<pattern>/show_disclaimer</pattern>
+		<pattern>/show_contact</pattern>
+		<pattern>/show_advice</pattern>
 	</decorator>
 </decorators>

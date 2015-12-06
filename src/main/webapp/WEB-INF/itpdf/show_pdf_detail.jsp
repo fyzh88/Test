@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +34,19 @@
 				<h3>作者：${requestScope.pdf_detail_book_info['author'] }</h3>
 				<h4>出版社：${requestScope.pdf_detail_book_info['publisher'] }</h4>
 				<h4>页数：${requestScope.pdf_detail_book_info['pages'] } 页</h4>
-				<h4>文件大小：${requestScope.pdf_detail_book_info['file_len'] }字节</h4>
+				<c:set var="fileSize" value="${requestScope.pdf_detail_book_info['file_len'] }"></c:set>
+				<c:if test="${fileSize>0 && fileSize< 1024 }">
+					<fmt:formatNumber  var="fileSizeFormat" value="${fileSize }" pattern="#.00字节"></fmt:formatNumber>
+					<h4>文件大小：${fileSizeFormat }</h4>
+				</c:if>
+				<c:if test="${fileSize>1024 && fileSize< 1024*1024 }">
+					<fmt:formatNumber  var="fileSizeFormat" value="${fileSize/1024 }" pattern="#.00KB"></fmt:formatNumber>
+					<h4>文件大小：${fileSizeFormat }</h4>
+				</c:if>
+				<c:if test="${fileSize>1024*1024 && fileSize< 1024*1024*1024 }">
+					<fmt:formatNumber  var="fileSizeFormat" value="${fileSize/1024/1024 }" pattern="#.00MB"></fmt:formatNumber>
+					<h4>文件大小：${fileSizeFormat }</h4>
+				</c:if>
 				<h4>分类标签：${requestScope.pdf_detail_book_info['category'] }</h4>
 			</div>
 			<div class="well">

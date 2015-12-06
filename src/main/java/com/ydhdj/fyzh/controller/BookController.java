@@ -101,6 +101,27 @@ public class BookController {
 		
 		return mv;
 	}
+	//显示版权声明
+	@RequestMapping("/show_disclaimer")
+	public ModelAndView  showDisclaimer(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("disclaimer");
+		return mv;
+	}
+	//意见反馈
+	@RequestMapping("show_advice")
+	public ModelAndView showAdvice(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("advice");
+		return mv;
+	}
+	//联系我们
+	@RequestMapping("/show_contact")
+	public ModelAndView showContctUs(){
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("contact_us");
+		return mv;
+	}
 	//显示PDF文件的第一页图片
 	@RequestMapping("/getPdfImageOf")
 	public void getPdfImageOf(HttpServletRequest request,HttpServletResponse response,final String bookId, int pageIndex){

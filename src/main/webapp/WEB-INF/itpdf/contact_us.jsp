@@ -24,60 +24,16 @@
 <body>
 	<div class="row">
 		<div class="col-md-12">
-			<div class="col-md-2">
-				<img src="static/img/dummy.png" class="img-rounded">
-			</div>
-			<div class="col-md-4">
-				<h5>名称:</h5>
-				<h5>作者:</h5>
-				<h5>出版社:</h5>
-				<h5>页数:</h5>
-			</div>
-			<div class="col-md-2">
-				<img src="static/img/dummy.png" class="img-rounded">
-			</div>
-			<div class="col-md-4">
-				<h5>名称:</h5>
-				<h5>作者:</h5>
-				<h5>出版社:</h5>
-				<h5>页数:</h5>
-			</div>
+			<div class="panel panel-primary">
+			   <div class="panel-heading">
+			      <h3 class="panel-title">联系我们</h3>
+			   </div>
+			   <div class="panel-body">
+			   	<h3>Email:fyzh88@126.com</h3><br>
+			   	<h3>QQ:1776138054</h3>
+			   </div>			
 		</div>
 	</div>
-	<br>
-	<div class="row">
-		<div class="col-md-12">
-
-			<div class="col-md-2">
-				<img src="static/img/dummy.png" class="img-rounded">
-			</div>
-			<div class="col-md-4">
-				<h5>名称:</h5>
-				<h5>作者:</h5>
-				<h5>出版社:</h5>
-				<h5>页数:</h5>
-			</div>
-			<div class="col-md-2">
-				<img src="static/img/dummy.png" class="img-rounded">
-			</div>
-			<div class="col-md-4">
-				<h5>名称:</h5>
-				<h5>作者:</h5>
-				<h5>出版社:</h5>
-				<h5>页数:</h5>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
-		 <ul class="pagination pagination-lg">
-		  <li><a href="#">&laquo;</a></li>
-		  <li><a href="#">1</a></li>
-		  <li><a href="#">2</a></li>
-		  <li><a href="#">3</a></li>
-		  <li><a href="#">4</a></li>
-		  <li><a href="#">5</a></li>
-		  <li><a href="#">&raquo;</a></li>
-		</ul><br>
 	</div>
  
 </body>
