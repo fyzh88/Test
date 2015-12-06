@@ -104,6 +104,26 @@
 		</div>
 	</div>
 	<!-- 页脚 -->
+	<div class="row">
+		<div class="col-md-11">
+		</div>
+		<div class="col-md-1">
+			<a href="#">免责声明</a>
+			<a href="#">意见反馈</a>
+			<a href="#">联系我们</a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			   <div style="text-align:center;">
+			      <h4>Copyright &copy; 2015-2020    All Rights Reserved. </h4>
+			   </div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" style="height:45px">
+		</div>
+	</div>
 </div>
 </body>
 </html>

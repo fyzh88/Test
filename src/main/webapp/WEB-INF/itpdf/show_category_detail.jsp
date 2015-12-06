@@ -46,8 +46,9 @@
 			</c:if>
 		</c:forEach>
 	</div>
+	<div class="row" style="height:20px"></div>
 	</c:forEach>
-	
+	<div class="col-md-12" style="height:25px"></div>
 	<c:choose>
 		<c:when test="${totalAll > (totalOnePage) && total>0}">
 			<div class="col-md-12">
