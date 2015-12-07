@@ -53,7 +53,7 @@
 				<!-- p>${requestScope.pdf_text_info }</p-->
 			</div>
 			<div class="well">
-				<h3>分享地址：<a href="${requestScope.pdf_detail_book_info['shared_addr'] }">获取</a></h3>
+				<h3>分享地址：<a href="${requestScope.pdf_detail_book_info['shared_addr'] }" target="_blank">获取</a></h3>
 				<h3>提取码：${requestScope.pdf_detail_book_info['share_code'] }</h3>
 			</div>
 		</div>
