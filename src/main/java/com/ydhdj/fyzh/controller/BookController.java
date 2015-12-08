@@ -101,6 +101,34 @@ public class BookController {
 		
 		return mv;
 	}
+	//站内搜索
+	@RequestMapping("/search")
+	public ModelAndView search(final String key,int start, int curPageIndex){
+		if(start < 0 ){start = 0;}
+		if(curPageIndex <=  0){curPageIndex=0;}
+		
+		ModelAndView mv = new ModelAndView();
+		if(!StringUtils.isEmpty(key)){
+			BookService m_bs = (BookService)SpringContextUtils.getBean("main_service");
+			List<BookInfoBean> books = m_bs.searchInSite(key,start,COUNT_PDF_PER_PAGE);
+			
+			Long total = m_bs.getTotalWithKey(key);
+			//约束curPageIndex
+			Long pageCnt = total/COUNT_PDF_PER_PAGE;
+			Long mode = total%COUNT_PDF_PER_PAGE;
+			if(mode == 0){pageCnt--;}
+			if(pageCnt < 0){pageCnt = 0L;}			
+			if(curPageIndex>pageCnt){curPageIndex = pageCnt.intValue();}
+			
+			mv.getModel().put(CommonConst.SEARCH_RESULT, books);
+			mv.getModel().put(CommonConst.TOTAL_IN_CATEGORY,total);
+			mv.getModel().put(CommonConst.CURRENT_PAGE_INDEX, curPageIndex);
+			mv.setViewName("show_search_result");
+		}else{
+			mv.setViewName("show_not_exist");
+		}
+		return mv;
+	}
 	//显示版权声明
 	@RequestMapping("/show_disclaimer")
 	public ModelAndView  showDisclaimer(){

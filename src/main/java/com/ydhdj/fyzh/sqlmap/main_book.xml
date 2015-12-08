@@ -46,6 +46,12 @@
 		INSERT INTO itpdf_books(id,user_id,md,file_len,name,save_name,author,pages,publisher,category,shared_addr,share_code) 
 		VALUES(#{id},#{user_id},#{md},#{file_len},#{name},#{save_name},#{author},#{pages},#{publisher},#{category},#{shared_addr},#{share_code});
 	</insert>
-	
-	
+	<!-- 站内搜索 -->
+	<select id="searchInSite" parameterType="hashmap" resultType="BookInfoBean">
+		SELECT * FROM itpdf_books WHERE name LIKE %#{key}% ORDER BY date DESC LIMIT #{start},#{limitCnt};
+	</select>
+	<!--  -->
+	<select id="getTotalWithKey" resultType="hashmap" parameterType="str">
+		SELECT COUNT(0) AS cnt FROM itpdf_books WHERE name LIKE %#{key};
+	</select>
 </mapper> 

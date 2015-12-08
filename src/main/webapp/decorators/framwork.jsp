@@ -78,9 +78,9 @@
 		</div>
 		<div class="col-md-4 col-md-offset-4">
 			 <div class="input-group">
-               <input type="text" class="form-control">
+               <input id="searchKeyWord" type="text" class="form-control" >
                <span class="input-group-btn">
-                  <button class="btn btn-default" type="button">站内搜索 </button>
+                  <button id="searchInSite" class="btn btn-default" type="button">站内搜索</button>
                </span>
             </div>
 		</div>
@@ -128,5 +128,6 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript" src="<c:url value='/static/my_js/search.js'/>"></script>
 </body>
 </html>

@@ -315,5 +315,32 @@ public class BookService {
 			if(ss != null){ss.close();}
 		}
 	}
-	
+	//站内搜索
+	 public List<BookInfoBean> searchInSite(final String key,int start,int limitCnt){
+		 SqlSession ss = sqlSessionFactory.openSession();
+		 try{
+			 HashMap<String,Object> parameter = new HashMap<String,Object>();
+				parameter.put("category",key);
+				parameter.put("limitCnt", limitCnt);
+				parameter.put("start", start);
+			 return ss.selectList("itpdf_main.searchInSite", parameter);
+		 }finally{
+			 if(ss != null){ss.close();}
+		 }
+	 }
+	 //
+	 public Long getTotalWithKey(final String key){
+		 if(StringUtils.isEmpty(key)){return 0L;}
+		 SqlSession ss = sqlSessionFactory.openSession();
+			try{
+				HashMap<String,Long> result =ss.selectOne("itpdf_main.getTotalWithKey",key);
+				if(result != null && !result.isEmpty()){
+					Long cnt = result.get("cnt");
+					return cnt;
+				}
+			}finally{
+				if(ss != null){ss.close();}
+			}
+			return 0L;
+	 }
 }

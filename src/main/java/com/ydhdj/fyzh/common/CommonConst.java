@@ -13,4 +13,5 @@ public class CommonConst {
 	public static final String PDF_TEXT_INFO = "pdf_text_info";
 	public static final String TOTAL_IN_CATEGORY="total_in_category";
 	public static final String CURRENT_PAGE_INDEX="current_page_index";
+	public static final String SEARCH_RESULT="search_result";
 }
