@@ -29,6 +29,16 @@
 <script type="text/javascript" src="<c:url value='/static/js/jquery-1.11.2.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/bootstrap-3.3.4/js/bootstrap.min.js'/>"></script>
 
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?77a82e15c4f76fe436bb69d1301a085d";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
 </head>
 <body>
 <div class="container">
@@ -65,7 +75,7 @@
 				
 			</h4>
 			<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
-			<a href="show_upload" class="pull-right">上传PDF</a>
+			
 		</div>
 	</div>
 	<br>
@@ -121,6 +131,11 @@
 			   <div style="text-align:center;">
 			      <h6>Copyright &copy; 2015-2020    All Rights Reserved. </h6>
 			   </div>
+		</div>
+		<div class="col-md-12">
+			<div style="text-align:center;">
+			<h6>冀ICP备15029302号 &nbsp;&nbsp;版权所有</h6>
+			</div>
 		</div>
 	</div>
 	<div class="row">

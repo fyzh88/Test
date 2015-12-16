@@ -28,7 +28,7 @@ import com.ydhdj.fyzh.service.AttachmentService;
 import com.ydhdj.fyzh.service.BookService;
 import com.ydhdj.fyzh.utils.SpringContextUtils;
 
-@Controller("/")
+@Controller("/book")
 public class BookController {
 	private static final Logger log = LoggerFactory.getLogger(BookController.class);
 	private static final int COUNT_PDF_PER_PAGE = 20;
