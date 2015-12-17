@@ -30,6 +30,13 @@
 		<property name="password" value="${jdbc.password}"/>
 		<property name="url" value="${jdbc.url}"/>
 		<property name="driverClassName" value="${jdbc.driver}"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="testOnReturn" value="false"/>
+		<property name="testOnBorrow" value="false"/>
+		<property name="validationQuery" value="select 1"/>
+		<property name="timeBetweenEvictionRunsMillis" value="30000"/>
+		<property name="numTestsPerEvictionRun" value="30"/>
+		<property name="minEvictableIdleTimeMillis" value="18000000"></property>
 	</bean>
 	
 	<!-- MyBatis 操作数据库 -->
