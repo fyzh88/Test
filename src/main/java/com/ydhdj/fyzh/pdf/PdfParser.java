@@ -138,6 +138,20 @@ public class PdfParser {
 		    System.out.println(builder.toString());
 		    String shStr = builder.toString();
 		 executeShellCmd(shStr);
+		 //
+		 optimizePdfCovers(coverPath,md);
+	}
+	//Compress PDF images,so we can improve the web performance
+	//The first image as a thumb nail ,so its size MUST be smaller than 50K
+	//Other images will keep 8 bit depth.
+	private void optimizePdfCovers(final String coverPath,final String md){
+		//
+		StringBuilder builder = new StringBuilder();
+		builder.append("cd \'").append(coverPath).append("\';");
+		builder.append("./optimize.sh \'").append(md).append("-*\'");
+		String cmdStr = builder.toString();
+		System.out.println(cmdStr);
+		executeShellCmd(cmdStr);
 	}
 	//
 	private List<String> executeShellCmd(final String shStr){

@@ -14,6 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="keywords" content="it领域内的pdf分享平台">
 <meta name="description" content="计算机领域内的pdf电子文件分享平台">
+<meta name="baidu-site-verification" content="LyjcN7ZUh0" />
 <title>ITPDF分享平台</title>
 <link rel="stylesheet" href="<c:url value='/static/bootstrap-3.3.4/css/bootstrap.min.css'/>"/>
 <link rel="stylesheet" href="<c:url value='/static/css/font.css'/>"/>

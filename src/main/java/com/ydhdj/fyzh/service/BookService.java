@@ -110,11 +110,11 @@ public class BookService {
 					//文件大小
 					bib.setFile_len((int)len);
 					//文件的原始名称
-					bib.setName(name);
+					bib.setName(formatName(name));
 					//作者
 					bib.setAuthor("unkown");
 					//分类
-					bib.setCategory("headfirst");
+					bib.setCategory("software engineering");
 					//出版社
 					bib.setPublisher("unkown");
 					//分享地址
@@ -131,6 +131,7 @@ public class BookService {
 					pp.saveBookmark(DIRECTORY_PATH,strMd);
 					//生成前n页PDF缩略图
 					pp.savePdfCover(file,COVER_PATH,strMd);
+					//
 				}else{
 					//不是pdf文件
 				}
@@ -142,6 +143,21 @@ public class BookService {
 			}
 		}
 		return null;
+	}
+	//Remove special characters in the file name
+	private String formatName(final String name){
+		if(StringUtils.isEmpty(name)){return "";}
+		int dot_l = name.lastIndexOf(".");
+		if(dot_l != -1){
+			String sufix = name.substring(dot_l);
+			String trueName = name.substring(0,dot_l);
+			trueName = trueName.replace(".", " ");
+			trueName = trueName.replace("+", " ");
+			trueName = trueName.replace("=", " ");
+			String formatName = trueName+sufix;
+			return formatName;
+		}
+		return "";
 	}
 	//判定相同文件是否存在
 	public BookInfoBean getSameFile(final MultipartFile file){

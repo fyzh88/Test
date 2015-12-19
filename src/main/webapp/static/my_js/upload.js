@@ -17,7 +17,7 @@ $(function(){
 	/**
 	 * 提取分享地址
 	 */
-	$("#shared_addr").change(function(){
+	$("#shared_addr_").change(function(){
 		var addr_w = $(this).val();
 		var addr_12 = addr_w.split(" ");
 		var addr_1 = addr_12[0];
@@ -27,6 +27,17 @@ $(function(){
 		var realcode=addr_code[1];
 		var lastPart = realcode.substr(0,4);
 		$("#share_code").val(lastPart);
+	});
+	/**
+	 * 提取分享地址
+	 */
+	$("#shared_addr").change(function(){
+		var addr_w = $(this).val();
+		var addr_12 = addr_w.split(" ");
+		var addr_1 = addr_12[1];
+		var addr_2 = addr_12[3];
+		$(this).val(addr_1);
+		$("#share_code").val(addr_2);
 	});
 	/**
 	 * 分享文件
