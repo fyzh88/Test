@@ -29,8 +29,8 @@
 			      <h3 class="panel-title">联系我们</h3>
 			   </div>
 			   <div class="panel-body">
-			   	<h3>Email:fyzh88@126.com</h3><br>
-			   	<h3>QQ:1776138054</h3>
+			   	<h3><a href="mailto:fyzh88@126.com">Email:fyzh88@126.com</a></h3><br>
+			   	<h3><a href="tencent://message/?uin=707321921&amp;Site=QQ&amp;Menu=yes">QQ:1776138054</a></h3>
 			   </div>			
 		</div>
 	</div>

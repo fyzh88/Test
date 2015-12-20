@@ -29,7 +29,7 @@
 <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=31130e83-30f1-4349-aa45-75f02ca4027d&style=2&textcolor=#000000&bgcolor=none&bp=qqmb,weixin,bsharesync,qzone,sinaminiblog,renren,qqim&text=分享"></script>
 <script type="text/javascript" src="<c:url value='/static/js/jquery-1.11.2.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/bootstrap-3.3.4/js/bootstrap.min.js'/>"></script>
-
+<!--  
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -39,7 +39,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-
+-->
 </head>
 <body>
 <div class="container">
