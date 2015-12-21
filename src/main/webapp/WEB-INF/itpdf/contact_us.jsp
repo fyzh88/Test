@@ -26,7 +26,7 @@
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 			   <div class="panel-heading">
-			      <h3 class="panel-title">联系我们</h3>
+			      <h3 class="panel-title"><span class="glyphicon glyphicon-user"></span>联系我们</h3>
 			   </div>
 			   <div class="panel-body">
 			   	<h3><a href="mailto:fyzh88@126.com">Email:fyzh88@126.com</a></h3><br>

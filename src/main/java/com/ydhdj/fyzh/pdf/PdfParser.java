@@ -50,10 +50,11 @@ public class PdfParser {
 		String fn = pdfFile.getName();
 		StringBuilder builder = new StringBuilder();
 		builder.append("cd ").append(pdfDir).append(";");
-		builder.append("pdfinfo \"").append(fn).append("\" |grep Pages:|cut -d \":\" -f 2;");
+		builder.append("pdfinfo \"").append(fn).append("\" |grep -a Pages:|cut -d \":\" -f 2;");
 		List<String> ret = executeShellCmd(builder.toString());
 		if(ret != null && !ret.isEmpty()){
 			String strNum = ret.get(0);
+			System.out.println(strNum);
 			strNum = strNum.trim();
 			return Integer.valueOf(strNum);
 		}
