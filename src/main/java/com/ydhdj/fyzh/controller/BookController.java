@@ -123,6 +123,7 @@ public class BookController {
 			mv.getModel().put(CommonConst.SEARCH_RESULT, books);
 			mv.getModel().put(CommonConst.TOTAL_IN_CATEGORY,total);
 			mv.getModel().put(CommonConst.CURRENT_PAGE_INDEX, curPageIndex);
+			mv.getModel().put(CommonConst.SEARCH_KEY,key);
 			mv.setViewName("show_search_result");
 		}else{
 			mv.setViewName("show_not_exist");

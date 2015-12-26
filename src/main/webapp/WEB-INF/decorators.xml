@@ -15,7 +15,7 @@
 		<pattern>/show_disclaimer</pattern>
 		<pattern>/show_contact</pattern>
 		<pattern>/show_advice</pattern>
-		<pattern>/show_search_result</pattern>
+		<pattern>/search</pattern>
 		<pattern>show_login</pattern>
 		<pattern>show_register</pattern>
 	</decorator>

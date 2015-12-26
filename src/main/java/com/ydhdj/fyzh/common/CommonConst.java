@@ -14,4 +14,5 @@ public class CommonConst {
 	public static final String TOTAL_IN_CATEGORY="total_in_category";
 	public static final String CURRENT_PAGE_INDEX="current_page_index";
 	public static final String SEARCH_RESULT="search_result";
+	public static final String SEARCH_KEY="search_key";
 }

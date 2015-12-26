@@ -14,7 +14,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="keywords" content="it领域内的pdf分享平台">
 <meta name="description" content="计算机领域内的pdf电子文件分享平台">
-<meta name="baidu-site-verification" content="LyjcN7ZUh0" />
 <title>ITPDF分享平台</title>
 <link rel="stylesheet" href="<c:url value='/static/bootstrap-3.3.4/css/bootstrap.min.css'/>"/>
 <link rel="stylesheet" href="<c:url value='/static/css/font.css'/>"/>
@@ -39,7 +38,16 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
--->
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    bp.src = '//push.zhanzhang.baidu.com/push.js';
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+-->            
 </head>
 <body>
 <div class="container">
@@ -89,7 +97,7 @@ var _hmt = _hmt || [];
 		</div>
 		<div class="col-md-4 col-md-offset-4">
 			 <div class="input-group">
-               <input id="searchKeyWord" type="text" class="form-control" >
+               <input id="searchKeyWord" type="text" class="form-control" value="${requestScope.search_key }">
                <span class="input-group-btn">
                   <button id="searchInSite" class="btn btn-default" type="button">站内搜索</button>
                </span>
@@ -144,6 +152,9 @@ var _hmt = _hmt || [];
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+	var path="${path}";
+</script>
 <script type="text/javascript" src="<c:url value='/static/my_js/search.js'/>"></script>
 </body>
 </html>

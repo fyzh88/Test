@@ -53,16 +53,16 @@
 		<c:when test="${totalAll > (totalOnePage) && total>0}">
 			<div class="col-md-12">
 				 <ul class="pagination pagination">
-				 <li><a href="show_category?category=${requestScope.search_result[0]['category'] }&start=0&curPageIndex=0">首页</a></li>
+				 <li><a href="search?key=${requestScope.search_key }&start=0&curPageIndex=0">首页</a></li>
 				 <c:set var="curPageIndex" value="${requestScope.current_page_index }"></c:set>
 				 <c:set var="prePageIndex" value="${((curPageIndex-1>=0)?(curPageIndex-1):0) }"></c:set>
-				  <li><a href="show_category?category=${requestScope.search_result[0]['category'] }&start=${prePageIndex*totalOnePage }&curPageIndex=${prePageIndex}">上一页</a></li>
+				  <li><a href="search?key=${requestScope.search_key }&start=${prePageIndex*totalOnePage }&curPageIndex=${prePageIndex}">上一页</a></li>
 				  <c:forEach var="number"  begin="1" end="${pageCnt }" step="1">
-				 	 <li><a href="show_category?category=${requestScope.search_result[0]['category'] }&start=${(number-1)*totalOnePage }&curPageIndex=${number}">${number }</a></li>
+				 	 <li><a href="search?key=${requestScope.search_key }&start=${(number-1)*totalOnePage }&curPageIndex=${number}">${number }</a></li>
 				  </c:forEach>
 				  <c:set var="nextPageIndex" value="${ ((curPageIndex+1>=(pageCntInt-1))?(pageCntInt-1):(curPageIndex+1))}"></c:set>
-				  <li><a href="show_category?category=${requestScope.search_result[0]['category'] }&start=${nextPageIndex*totalOnePage}&curPageIndex=${nextPageIndex}">下一页</a></li>
-				   <li><a href="show_category?category=${requestScope.search_result[0]['category'] }&start=${(pageCntInt-1)*totalOnePage }&curPageIndex=${pageCntInt-1}">末页</a></li>
+				  <li><a href="search?key=${requestScope.search_key }&start=${nextPageIndex*totalOnePage}&curPageIndex=${nextPageIndex}">下一页</a></li>
+				   <li><a href="search?key=${requestScope.search_key }&start=${(pageCntInt-1)*totalOnePage }&curPageIndex=${pageCntInt-1}">末页</a></li>
 				</ul><br>
 			</div>
 		</c:when>

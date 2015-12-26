@@ -336,7 +336,7 @@ public class BookService {
 		 SqlSession ss = sqlSessionFactory.openSession();
 		 try{
 			 HashMap<String,Object> parameter = new HashMap<String,Object>();
-				parameter.put("category",key);
+				parameter.put("key",key);
 				parameter.put("limitCnt", limitCnt);
 				parameter.put("start", start);
 			 return ss.selectList("itpdf_main.searchInSite", parameter);
@@ -349,7 +349,9 @@ public class BookService {
 		 if(StringUtils.isEmpty(key)){return 0L;}
 		 SqlSession ss = sqlSessionFactory.openSession();
 			try{
-				HashMap<String,Long> result =ss.selectOne("itpdf_main.getTotalWithKey",key);
+				HashMap<String,String> param = new HashMap<String,String>();
+				param.put("key", key);
+				HashMap<String,Long> result =ss.selectOne("itpdf_main.getTotalWithKey",param);
 				if(result != null && !result.isEmpty()){
 					Long cnt = result.get("cnt");
 					return cnt;
