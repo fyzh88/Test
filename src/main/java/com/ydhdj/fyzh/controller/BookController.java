@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ydhdj.fyzh.bean.AdviceBean;
 import com.ydhdj.fyzh.bean.AttachmentInfoBean;
 import com.ydhdj.fyzh.bean.BookInfoBean;
 import com.ydhdj.fyzh.common.CommonConst;
 import com.ydhdj.fyzh.service.AttachmentService;
 import com.ydhdj.fyzh.service.BookService;
+import com.ydhdj.fyzh.service.UserService;
 import com.ydhdj.fyzh.utils.SpringContextUtils;
 
 @Controller("/book")
@@ -137,13 +139,6 @@ public class BookController {
 		mv.setViewName("disclaimer");
 		return mv;
 	}
-	//意见反馈
-	@RequestMapping("show_advice")
-	public ModelAndView showAdvice(){
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("advice");
-		return mv;
-	}
 	//联系我们
 	@RequestMapping("/show_contact")
 	public ModelAndView showContctUs(){
@@ -188,7 +183,7 @@ public class BookController {
 	}
 	
 	//上传文件功能目前的打算是只为自己方便构建数据库数据而引入
-	@RequestMapping("upload_pdf")
+	@RequestMapping("/upload_pdf")
 	public ModelAndView uploadPdf(@RequestParam(value="file", required=false)MultipartFile file,
 			HttpServletRequest request,HttpServletResponse response){
 		ModelAndView mv = new ModelAndView();

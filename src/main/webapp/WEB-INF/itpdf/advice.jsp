@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="path" value="<%=request.getContextPath()%>"></c:set>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,10 +29,28 @@
 			   <div class="panel-heading">
 			      <h3 class="panel-title">宝贵意见</h3>
 			   </div>
-			   <div class="panel-body"></div>			
+			   <div class="panel-body">
+			   <c:forEach items="${requestScope.advices }" varStatus="id" var="advice">
+			    <div class="well">
+				   	<h5><fmt:formatDate value="${advice['date']}" type="both" pattern="yyyy-MM-dd HH:mm:ss"/> &nbsp;${advice['author'] }&nbsp;匿名</h5>
+				   	<h4> &nbsp; ${advice['content'] }</h4>
+				   	
+			     </div>
+			   </c:forEach>
+			    <div class="input-group">
+			    	<input type="text" class="form-control" id="adviceContent" placeholder="我们希望听到你的声音">
+			         <span class="input-group-btn">
+			         	  <button class="btn btn-default" type="button" id="sendAdvice">发表</button>
+			         </span>
+			      </div>
+			   </div>			
 		</div>
 	</div>
 	</div>
- 
+	<script type="text/javascript">
+		var path="${path}";
+	</script>
+ 	<script type="text/javascript" src="<c:url value='/static/my_js/advice.js'/>"></script>
+ 	
 </body>
 </html>

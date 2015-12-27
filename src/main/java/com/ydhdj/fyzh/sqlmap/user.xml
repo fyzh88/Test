@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="itpdf_attachment">	
+<mapper namespace="itpdf_user">	
 
 	<resultMap type="UserInfoBean" id="userid">
 		<id property="id" column="id"/>
@@ -10,5 +10,21 @@
 		<id property="phone" column="phone"/>
 	</resultMap>
 	
+	<resultMap type="AdviceBean" id="adviceid">
+		<id property="id" column="id"/>
+		<id property="date" column="date"/>
+		<id property="content" column="content"/>
+		<id property="author" column="author"/>
+	</resultMap>
 	
+	<select id="getAdvices" resultType="AdviceBean" parameterType="hashmap">
+		SELECT * FROM itpdf_advice ORDER BY date DESC LIMIT #{start},#{limitCnt};
+	</select>
+	
+	<select id="getById" resultType="AdviceBean" parameterType="str">
+		SELECT * FROM itpdf_advice WHERE id=#{id};
+	</select>
+	<insert id="insertAdvice" parameterType="AdviceBean">
+		INSERT INTO itpdf_advice(id,content,author) VALUES(#{id},#{content},#{author});
+	</insert>
 </mapper>

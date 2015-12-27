@@ -15,4 +15,5 @@ public class CommonConst {
 	public static final String CURRENT_PAGE_INDEX="current_page_index";
 	public static final String SEARCH_RESULT="search_result";
 	public static final String SEARCH_KEY="search_key";
+	public static final String ADVICES="advices";
 }
