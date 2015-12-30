@@ -28,7 +28,7 @@
 <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=31130e83-30f1-4349-aa45-75f02ca4027d&style=2&textcolor=#000000&bgcolor=none&bp=qqmb,weixin,bsharesync,qzone,sinaminiblog,renren,qqim&text=分享"></script>
 <script type="text/javascript" src="<c:url value='/static/js/jquery-1.11.2.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/bootstrap-3.3.4/js/bootstrap.min.js'/>"></script>
-
+<!--  
 <script>
 var _hmt = _hmt || [];
 (function() {
@@ -39,6 +39,7 @@ var _hmt = _hmt || [];
 })();
 </script>
 
+
 <script>
 (function(){
     var bp = document.createElement('script');
@@ -47,7 +48,7 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
-          
+-->      
 </head>
 <body>
 <div class="container">
@@ -115,6 +116,14 @@ var _hmt = _hmt || [];
 					<div class="list-group-item"><a href="${url }">${item['category']}(${item['cnt']})</a></div>
 				</c:forEach>
 			</div>
+			<div class="list-group">
+				<div class="list-group-item active"><i class="glyphicon glyphicon-user">&nbsp;联系方式</i></div>
+				<div class="list-group-item">
+					<h5><a href="mailto:fyzh88@126.com">Email:fyzh84@163.com</a></h5>
+			   		<h5><a href="tencent://message/?uin=707321921&amp;Site=QQ&amp;Menu=yes">QQ群:521614960</a></h5>
+			   		<h5><a href="tencent://message/?uin=707321921&amp;Site=QQ&amp;Menu=yes">QQ:1776138054</a></h5>
+				</div>
+			</div>
 		</div>
 	
 		<div class="col-md-9">
@@ -124,7 +133,12 @@ var _hmt = _hmt || [];
 	</div>
 	<!-- 页脚 -->
 	<div class="row">
-		<div class="col-md-11">
+		<div class="col-md-10">
+		</div>
+		<div class="col-md-1">
+			<a href="#">友情链接</a>
+			<a href="http://www.runoob.com/" target="_blank">菜鸟笔记</a>
+			<a href="http://www.boost.org/" target="_blank">boost-c++</a>
 		</div>
 		<div class="col-md-1">
 			<c:url var="disclaimerUrl" value="/show_disclaimer"></c:url>
