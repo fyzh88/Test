@@ -49,14 +49,27 @@
 				</c:if>
 				<h4>分类标签：${requestScope.pdf_detail_book_info['category'] }</h4>
 			</div>
-			<div class="well">
-				<!-- p>${requestScope.pdf_text_info }</p-->
-			</div>
+			
 			<div class="well">
 				<h3>分享地址：<a href="${requestScope.pdf_detail_book_info['shared_addr'] }" target="_blank">获取</a></h3>
 				<h3>提取码：${requestScope.pdf_detail_book_info['share_code'] }</h3>
 			</div>
 		</div>
 	</div>
+	<div class="row"><div class="col-md-12"><h4>&nbsp;</h4></div></div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="list-group">
+				<li class="list-group-item active">
+					<span class="glyphicon glyphicon-pencil"></span>
+					&nbsp;简短书评</li>
+				<li class="list-group-item">
+					<textarea style="width:100%;" rows="5" placeholder="256个汉字以内"></textarea>
+				</li>
+			</ul>
+			<button class="btn btn-primary pull-right">发表</button>
+		</div>
+	</div>
+	<div class="row"><div class="col-md-12"><h4>&nbsp;</h4></div></div>
 </body>
 </html>

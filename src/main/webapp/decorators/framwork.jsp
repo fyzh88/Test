@@ -25,9 +25,9 @@
 <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
 <decorator:head></decorator:head>
-<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=31130e83-30f1-4349-aa45-75f02ca4027d&style=2&textcolor=#000000&bgcolor=none&bp=qqmb,weixin,bsharesync,qzone,sinaminiblog,renren,qqim&text=分享"></script>
 <script type="text/javascript" src="<c:url value='/static/js/jquery-1.11.2.min.js'/>"></script>
 <script type="text/javascript" src="<c:url value='/static/bootstrap-3.3.4/js/bootstrap.min.js'/>"></script>
+<script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=25f26395-3924-49d6-945a-f2e53eb24873&style=1&bp=qqmb,bsharesync,sinaminiblog,qzone,189share,sohuminiblog"></script>
 <!--  
 <script>
 var _hmt = _hmt || [];
@@ -48,7 +48,7 @@ var _hmt = _hmt || [];
     s.parentNode.insertBefore(bp, s);
 })();
 </script>
--->      
+-->   
 </head>
 <body>
 <div class="container">
@@ -84,7 +84,6 @@ var _hmt = _hmt || [];
 				</c:choose>
 				
 			</h4>
-			<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
 			
 		</div>
 	</div>
@@ -105,7 +104,9 @@ var _hmt = _hmt || [];
             </div>
 		</div>
 	</div>
-	<br>
+	<div class="row">
+		<div class="col-md-12"><h4>&nbsp;</h4></div>
+	</div>
 	<div class="row">
 		<!-- 左侧分类区域 -->
 		<div class="col-md-3" >
@@ -124,6 +125,8 @@ var _hmt = _hmt || [];
 			   		<h5><a href="tencent://message/?uin=707321921&amp;Site=QQ&amp;Menu=yes">QQ:1776138054</a></h5>
 				</div>
 			</div>
+			<a class="bshareDiv" href="http://www.bshare.cn/share">分享按钮</a>
+			
 		</div>
 	
 		<div class="col-md-9">
@@ -157,7 +160,7 @@ var _hmt = _hmt || [];
 		</div>
 		<div class="col-md-12">
 			<div style="text-align:center;">
-			<h6>冀ICP备15029302号 &nbsp;&nbsp;版权所有</h6>
+			<h6><a href="http://www.miitbeian.gov.cn/" target="_blank">冀ICP备15029302号</a> &nbsp;&nbsp;版权所有</h6>
 			</div>
 		</div>
 	</div>
